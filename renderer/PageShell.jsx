@@ -5,7 +5,6 @@ import { PageContextProvider } from "./usePageContext";
 import { childrenPropType } from "./PropTypeValues";
 import "./index.css";
 import logo from "/logo.svg";
-import { useLocation, Link } from "react-router-dom";
 import { BiSolidDashboard } from "react-icons/bi";
 import { TbTargetArrow } from "react-icons/tb";
 import { MdLocationOn } from "react-icons/md";
@@ -20,13 +19,7 @@ PageShell.propTypes = {
   children: childrenPropType,
 };
 function PageShell({ pageContext, children }) {
-  const [menu, setMenu] = useState(false);
-  const [activePage, setActivePage] = useState(window.location.pathname);
-
-  const handleSetActivePage = (url) => {
-    setActivePage(url);
-  };
-
+  const [menu, setMenu] = useState(false)
 
   
   return (
@@ -35,7 +28,7 @@ function PageShell({ pageContext, children }) {
         <Layout>
           <Header>
             <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-              <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+              <div className="w-11/12 flex flex-wrap items-center justify-between mx-auto p-4">
                 <a
                   href="/"
                   className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -68,10 +61,10 @@ function PageShell({ pageContext, children }) {
                   className={`${menu ? '' : 'hidden'} w-full md:block md:w-auto`}
                 >
                   <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li onClick={() => handleSetActivePage('/dashboard')}>
+                    <li>
                       <a
                         href="/dashboard"
-                        className={`${activePage === '/dashboard' ? 'active' : ''} block py-2 px-3 text-white bg-blue-700 rounded  md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent`}
+                        className={` block py-2 px-3 text-white bg-blue-700 rounded  md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent`}
                         aria-current="page"
                       >
                         <div className="flex items-center gap-1  ">
@@ -137,8 +130,8 @@ Header.propTypes = {
 };
 function Header({ children }) {
   return (
-    <div className="">
-      <div className="">{children}</div>
+    <div className="shadow-md">
+      {children}
     </div>
   );
 }
