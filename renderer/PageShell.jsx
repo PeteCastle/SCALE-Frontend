@@ -26,14 +26,15 @@ function PageShell({ pageContext, children }) {
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
         <Layout>
-          <Header>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-              <div className="w-11/12 flex flex-wrap items-center justify-between mx-auto p-4">
+            <nav className="z-50  h-20 max-h-20 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+              <div className="max-w-screen- flex flex-wrap items-center justify-between mx-auto p-4">
                 <a
                   href="/"
                   className="flex items-center space-x-3 rtl:space-x-reverse"
                 >
-                  <img src={logo} className="h-14" alt="Scale Logo" />
+                  <figure className="w-full h-full max-w-32 xl:max-w-60">
+                    <img src={logo} className="w-full h-full" alt="Scale Logo" />
+                  </figure>
                 </a>
                 <button
                   type="button"
@@ -69,7 +70,7 @@ function PageShell({ pageContext, children }) {
                       >
                         <div className="flex items-center gap-1  ">
                           <BiSolidDashboard size={25} color=""/>
-                          <span className="text-sm md:text-base">Live Dashboard</span>
+                          <span className="text-sm xl:text-base">Live Dashboard</span>
                         </div>
                       </a>
                     </li>
@@ -80,7 +81,7 @@ function PageShell({ pageContext, children }) {
                       >
                         <div className="flex items-center gap-1">
                           <TbTargetArrow size={25} />
-                          <span className="text-sm md:text-base">Recent Captured</span>
+                          <span className="text-sm xl:text-base">Recent Captured</span>
                         </div>
                       </a>
                     </li>
@@ -91,7 +92,7 @@ function PageShell({ pageContext, children }) {
                       >
                         <div className="flex items-center gap-1">
                           <MdLocationOn size={25} />
-                          <span className="text-sm md:text-base">Active Systems</span>
+                          <span className="text-sm xl:text-base">Active Systems</span>
                         </div>
                       </a>
                     </li>
@@ -102,7 +103,7 @@ function PageShell({ pageContext, children }) {
                       >
                         <div className="flex items-center gap-1">
                           <FaMapMarkedAlt size={25} />
-                          <span className="text-sm md:text-base">Map Coverage</span>
+                          <span className="text-sm xl:text-base">Map Coverage</span>
                         </div>
                       </a>
                     </li>
@@ -110,7 +111,6 @@ function PageShell({ pageContext, children }) {
                 </div>
               </div>
             </nav>
-          </Header>
           <Content>{children}</Content>
         </Layout>
       </PageContextProvider>
@@ -122,23 +122,15 @@ Layout.propTypes = {
   children: childrenPropType,
 };
 function Layout({ children }) {
-  return <div className="">{children}</div>;
-}
-
-Header.propTypes = {
-  children: childrenPropType,
-};
-function Header({ children }) {
-  return (
-    <div className="shadow-md">
+  return <div className="h-screen flex flex-col">
       {children}
-    </div>
-  );
+    </div>;
 }
 
 Content.propTypes = {
   children: childrenPropType,
 };
+
 function Content({ children }) {
-  return <div>{children}</div>;
+  return <div className="w-full h-full overflow-x-hidden">{children}</div>;
 }
