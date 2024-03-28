@@ -97,7 +97,7 @@ const SecondSection = () => {
             <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
                 <img
-                  className="lg:w-[230px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                  className="lg:w-[280px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                   alt="Jese Avatar"
                 />
@@ -173,7 +173,7 @@ const SecondSection = () => {
             <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
               <img
-                  className="lg:w-[230px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                  className="lg:w-[280px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                   alt="Jese Avatar"
                 />
@@ -249,7 +249,7 @@ const SecondSection = () => {
             <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
               <img
-                  className="lg:w-[230px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                  className="lg:w-[280px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                   alt="Jese Avatar"
                 />
@@ -325,7 +325,7 @@ const SecondSection = () => {
             <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
               <img
-                  className="lg:w-[230px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                  className="lg:w-[280px] w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                   alt="Jese Avatar"
                 />

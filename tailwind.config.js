@@ -9,6 +9,14 @@ export default {
 ],
   theme: {
     extend: {},
+    fontFamily: {
+      primary: "Poppins-Regular",
+      'bold': "Poppins-Bold",
+      'light': "Poppins-Light",
+      'medium': "Poppins-Medium",
+      'heavy': "Poppins-Heavy",
+    },
+
   },
   plugins: [
     require('preline/plugin'),

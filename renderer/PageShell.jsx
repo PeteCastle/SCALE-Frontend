@@ -73,9 +73,9 @@ function PageShell({ pageContext, children }) {
                 </svg>
               </button>
               <div
-                className={`${menu ? "w-full " : "hidden"} w-12/12 md:block `}
+                className={`${menu ? "w-full " : "hidden"} w-12/12 md:block   `}
               >
-                <ul className="md:bg-transparent w-full flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul className=" md:bg-transparent w-full flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                   <li>
                     <a
                       href="/dashboard"
