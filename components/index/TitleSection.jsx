@@ -1,70 +1,99 @@
-import React from 'react'
+import React from "react";
 // import { BiSolidDashboard } from "react-icons/bi";
-import dashboard from '/dashboard.svg'
-import target from '/target.svg'
-import location from '/location.svg'
-import map from '/map.svg'
+import dashboard from "/dashboard.svg";
+import target from "/target.svg";
+import location from "/location.svg";
+import map from "/map.svg";
 const TitleSection = () => {
-    return (
-        <>
-            <section className='w-full h-fit p-5 xl:h-full flex flex-col'>
-                <div className='h-full w-full flex flex-col gap-10 items-center justify-center'>
-                    <div className='w-11/12 m-auto xl:m-0 flex flex-col gap-5 items-center justify-center'>
-                        <div className='text-xl text-center font-bold xl:text-4xl text-wrap max-w-[800px]'>
-                            Revolutionizing Mosquito Control: Innovative Technology for Global Health Protection
-                        </div>
-                        <p className='font-semibold xl:text-xl text-gray-600'>Smart Control Anti-mosquito Locator and Eliminator</p>
-                    </div>
-                    <div className='w-4/5 xl:h-2/5 flex'>
-                       <div className='w-full xl:w-3/5 h-full grid grid-cols- xl:grid-cols-5 xl:grid-rows-1  gap-5 m-auto'>
-                        <div className="xl:col-span-2  flex flex-col gap-5 p-2 xl:p-5 rounded-xl shadow-md overflow-hidden bg-[#EFDEAC]">
-                            <div className='m-auto flex justify-center text-center xl:text-start w-full flex-col'>
-                                <p className='text-xl'>Scale</p>
-                                <p className='text-xl xl:text-4xl font-bold'>Live Dashboard</p>
-                            </div>
-                            <div className='flex justify-center xl:justify-start'>
-                                <figure className='w-full h-full flex items-center justify-start max-w-[100px] xl:max-w-[200px]'>
-                                    {/* <BiSolidDashboard className='object-fit w-fit h-full'/> */}
-                                    <img src={dashboard} className='w-full h-full object-contain' alt="" />
-                                </figure>
-                            </div>
-                        </div>
-                        <div className="xl:col-span-2 flex flex-col gap-5 p-2 xl:p-5 rounded-xl shadow-md overflow-hidden bg-[#E6CA83]">
-                            <div className='m-auto flex justify-center text-center xl:text-start w-full  flex-col'>
-                                <p className='text-xl'>Scale</p>
-                                <p className='text-xl xl:text-4xl font-bold'>Recent Captured</p>
-                            </div>
-                           <div className='flex justify-center xl:justify-start'>
-                                <figure className='w-full h-full flex items-center justify-start max-w-[100px] xl:max-w-[200px]'>
-                                    {/* <BiSolidDashboard className='object-fit w-fit h-full'/> */}
-                                    <img src={target} className='w-full h-full object-contain' alt="" />
-                                </figure>
-                           </div>
-                        </div>
-                        <div className="col-span-2 xl:col-span-1 w-full h-full flex xl:flex-col gap-5">
-                                <div className="w-full h-full p-3 flex flex-col shadow-md bg-[#DFECCE]">
-                                    <div className="h-full text-center xl:text-start text-sm font-semibold">Active Mosquito Detection and Fumigation System</div>
-                                    <div className="h-full flex items-end justify-center xl:justify-start">
-                                        <figure className='w-full h-full max-w-20'>
-                                            <img src={location} alt="" />
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div className="w-full h-full p-3 flex flex-col shadow-md  bg-[#DFECCE]">
-                                    <div className="h-full text-sm font-semibold">Map Coverage of the Deployed Devices</div>
-                                    <div className="h-full flex items-end justify-center xl:justify-start ">
-                                        <figure className='w-full h-full max-w-20'>
-                                            <img src={map} alt="" />
-                                        </figure>
-                                    </div>
-                                </div>
-                        </div>
-                       </div>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
-}
+  return (
+    <>
+      <section className="py-10 xxl:py-0 w-full h-100 lg:h-screen flex flex-col justify-center items-center gap-12">
+        <div className="text-center px-4 lg:px-12">
+          <h1 className="text-2xl lg:text-5xl font-bold text-gray-800 mb-4 text-wrap">
+            Integrated Mosquito Detection and Fumigation System Utilizing Faster
+            Region-Based Convolutional Neural Networks
+          </h1>
+          <p className="text-md md:text-2xl text-gray-600 mb-8">
+            Smart Control Anti-mosquito Locator and Eliminator
+          </p>
+        </div>
+        <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+          <div className="bg-[#D9E3A7] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-42">
+              <img
+                src={dashboard}
+                alt="Live Dashboard"
+                className="w-24 h-24 md:w-28 md:h-28"
+              />
+            </div>
+            <div className="">
+              <p className="text-xl md:text-2xl  xxl:text-4xl font-bold mb-2">
+                Live Dashboard
+              </p>
+              <p className="text-md md:text-xl">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consectetur, libero.
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#F8FEDD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
+              <img
+                src={target}
+                alt="Recent Captured"
+                className="w-24 h-24 md:w-28 md:h-28"
+              />
+            </div>
+            <div className="">
+              <p className="text-xl md:text-2xl  xxl:text-4xl font-bold mb-2">
+                Recent Captured
+              </p>
+              <p className="text-md md:text-xl">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consectetur, libero.
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#ECF4C6] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
+              <img
+                src={location}
+                alt="Active Mosquito Detection and Fumigation System"
+                className="w-24 h-24 md:w-28 md:h-28"
+              />
+            </div>
+            <div className="">
+              <p className="text-xl md:text-2xl  xxl:text-4xl font-bold mb-2">
+                Active System
+              </p>
+              <p className="text-md md:text-xl">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consectetur, libero.
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#E2E7CD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
+              <img
+                src={map}
+                alt="Map Coverage of the Deployed Devices"
+                className="w-24 h-24 md:w-28 md:h-28"
+              />
+            </div>
+            <div className="">
+              <p className="text-xl md:text-2xl  xxl:text-4xl font-bold mb-2">
+                Map Coverage
+              </p>
+              <p className="text-md md:text-xl">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consectetur, libero.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default TitleSection;
