@@ -32,7 +32,7 @@ function PageShell({ pageContext, children }) {
                   href="/"
                   className="flex items-center space-x-3 rtl:space-x-reverse"
                 >
-                  <figure className="w-full h-full max-w-32 xl:max-w-60">
+                  <figure className="w-full h-full max-w-32 xl:max-w-50">
                     <img src={logo} className="w-full h-full" alt="Scale Logo" />
                   </figure>
                 </a>
