@@ -10,7 +10,7 @@ const SecondSection = () => {
         <div className="flex lg:flex-row md:flex-col-reverse flex-col-reverse w-full px-12 gap-8">
           <div className="w-full h-auto  flex ">
             <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-4  mx-auto gap-12">
-              <div className="flex-col flex justify-start mt-[12rem] ">
+              <div className="flex-col flex justify-start lg:mt-[4rem] mt-0">
                 <div className="max-w-sm p-6 justify-start text-center items-stretch gap-10 mb-4">
                   <img src="/logo/logo1.png" className=" flex mx-auto" />
                   <h1 className="text-xl font-bold my-4">
@@ -56,7 +56,7 @@ const SecondSection = () => {
               </div>
             </div>
           </div>
-          <div className="w-full h-auto  content-center">
+          <div className="w-full h-auto lg:h-screen content-center">
             <div className="flex mx-auto  items-center">
             <img src="/logo/model.png" className="flex mx-auto "/>
 
