@@ -101,7 +101,7 @@ const Dashboard = () => {
   ];
   return (
     <section className="w-full h-auto min-h-screen py-5 gap-5">
-      <div className="w-11/12 xl:w-4/5 h-2/5 xl:h-[700px] mb-5 m-auto bg-[#F9F5E6] border-2 p-3 xl:p-5 rounded-xl shadow-md flex flex-col">
+      <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[700px] mb-5 m-auto bg-[#F9F5E6] border-2 p-3 xl:p-5 rounded-xl shadow-md flex flex-col">
         <h1 className="font-bold pb-3 text-xl xl:text-3xl">Live Dashboard</h1>
         <div className="w-full xl:h-full h-60 ">
           <ResponsiveContainer width="100%" height="100%">
@@ -141,7 +141,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="w-11/12 xl:w-4/5 h-2/5 xl:h-[500px] mb-5 m-auto">
+      <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full h-full grid gap-5 xl:grid-cols-2">
           <div className="col-span-1">
             <div className="w-full h-full border"></div>
@@ -232,7 +232,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="w-11/12 xl:w-4/5 h-2/5 xl:h-[500px] mb-5 m-auto">
+      <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full  h-full flex flex-col xl:grid xl:grid-cols-4 gap-5 xl:grid-rows-2">
           <div className="col-span-1 xl:row-span-2 grid grid-cols-1 grid-rows-2 gap-5 ">
             <div className="relative col-span-1 row-span-1 border bg-[#EBEEE8] rounded-md shadow-md p-5 flex flex-col gap-3">
@@ -306,7 +306,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="w-11/12 xl:w-4/5 h-2/5 xl:h-[500px] m-auto">
+      <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] m-auto">
         <div className="w-full h-full grid xl:grid-cols-5 gap-5">
           <div className="xl:col-span-3 border bg-[#ECF5BE] rounded-xl shadow-md p-5 flex flex-col gap-5">
             <h1 className="font-bold text-lg">System Uptime</h1>
@@ -353,7 +353,7 @@ const Dashboard = () => {
                   <img src={clock} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-green-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
@@ -365,7 +365,7 @@ const Dashboard = () => {
                   <img src={star} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-red-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
@@ -377,7 +377,7 @@ const Dashboard = () => {
                   <img src={target} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-red-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
@@ -389,7 +389,7 @@ const Dashboard = () => {
                   <img src={bulb} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-green-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
