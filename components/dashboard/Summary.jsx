@@ -40,7 +40,7 @@ const Summary = () => {
   ];
 
   return (
-    <div className="col-span-3 border shadow-md rounded-xl flex flex-col py-2 md:p-5">
+    <div className="col-span-5 border shadow-md rounded-xl flex flex-col py-2 md:p-5">
       <div className="w-11/12 m-auto flex justify-center items-center gap-2 xl:gap-5">
         <div className="flex gap-2 items-center">
           <input
