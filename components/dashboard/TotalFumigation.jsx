@@ -34,7 +34,7 @@ const TotalFumigation = () => {
         <figure>
           <img src={fumigation} alt="" />
         </figure>
-        <p className="text-4xl font-bold">{totalFumigation}.00</p>
+        <p className="text-4xl font-bold">{Number(totalFumigation).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
         <p
           className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-red-800 font-semibold`}
         >

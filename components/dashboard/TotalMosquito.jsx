@@ -30,7 +30,7 @@ const TotalMosquito = () => {
         <figure>
           <img src={iconsearch} alt="" />
         </figure>
-        <p className="text-4xl font-bold">{totalMosquito}.00</p>
+        <p className="text-4xl font-bold">{Number(totalMosquito).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
         <p
           className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-green-800 font-semibold`}
         >
