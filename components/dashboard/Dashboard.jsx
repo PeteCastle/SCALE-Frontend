@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import arrow from "/arrow.svg";
-import fumigation from "/mosquito-fumigation.svg";
-import arrowred from "/arrow-red.svg";
-import arrowgreen from "/arrow-green.svg";
-import iconsearch from "/search-fumigation.svg";
 import clock from "/clock-icon.svg";
 import star from "/star-icon.svg";
 import target from "/target-icon.svg";
@@ -13,8 +9,6 @@ import Operation from "./Operation";
 import Detected from "./Detected";
 import Fumigation from "./Fumigation";
 import {
-  LineChart,
-  Line,
   PieChart,
   Pie,
   Cell,
@@ -28,6 +22,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import TotalMosquito from "./TotalMosquito";
+import TotalFumigation from "./TotalFumigation";
 
 const Dashboard = () => {
 
@@ -235,32 +231,8 @@ const Dashboard = () => {
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full  h-full flex flex-col xl:grid xl:grid-cols-4 gap-5 xl:grid-rows-2">
           <div className="col-span-1 xl:row-span-2 grid grid-cols-1 grid-rows-2 gap-5 ">
-            <div className="relative col-span-1 row-span-1 border bg-[#EBEEE8] rounded-md shadow-md p-5 flex flex-col gap-3">
-              <p className="font-semibold">Mosquito Fumigation Count</p>
-              <figure>
-                <img src={fumigation} alt="" />
-              </figure>
-              <p className="text-4xl font-bold">20.00</p>
-              <p
-                className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-red-800 font-semibold`}
-              >
-                <img src={arrowred} alt="" />
-                <p>{`180%`}</p>
-              </p>
-            </div>
-            <div className="relative col-span-1 row-span-1 border bg-[#EBEEE8] rounded-md shadow-md p-5 flex flex-col gap-3">
-              <p className="font-semibold">Mosquito Detection Count</p>
-              <figure>
-                <img src={iconsearch} alt="" />
-              </figure>
-              <p className="text-4xl font-bold">20.00</p>
-              <p
-                className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-green-800 font-semibold`}
-              >
-                <img src={arrowgreen} alt="" />
-                <p>{`180%`}</p>
-              </p>
-            </div>
+            <TotalFumigation/>
+           <TotalMosquito/>
           </div>
           <div className="xl:col-span-3 xl:row-span-2 bg-[#ECF4C6] rounded-xl shadow-md p-5 flex flex-col gap-5">
             <h1 className="font-bold text-xl xl:text-2xl">
@@ -308,42 +280,7 @@ const Dashboard = () => {
 
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] m-auto">
         <div className="w-full h-full grid xl:grid-cols-5 gap-5">
-          <div className="xl:col-span-3 border bg-[#ECF5BE] rounded-xl shadow-md p-5 flex flex-col gap-5">
-            <h1 className="font-bold text-lg">System Uptime</h1>
-            <div className="w-full  h-60 xl:h-full">
-            <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    width={500}
-                    height={300}
-                    data={dataLine}
-                    margin={{
-                      top: 5,
-                      bottom: 5,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis
-                      dataKey="name"
-                      tick={{ fontSize: 10 }}
-                      interval={0}
-                    />
-                    <YAxis
-                      yAxisId="left"
-                      tick={{ fontSize: 10 }}
-                      interval={0}
-                    />
-                    <Tooltip />
-                    <Line
-                      yAxisId="left"
-                      type="monotone"
-                      dataKey="Recent Detected Mosquitos"
-                      stroke="#8884d8"
-                      activeDot={{ r: 8 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-            </div>
-          </div>
+          <Detected/>
           <div className="xl:col-span-2 pt-5 flex flex-col gap-5">
             <h1 className="font-bold text-2xl pl-5">KPIs</h1>
             <div className="h-full grid xl:grid-cols-2 xl:grid-rows-2 gap-5">
