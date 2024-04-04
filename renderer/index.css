@@ -12,8 +12,8 @@ body{
       src: url('/fonts/Poppins-Regular.ttf') format("opentype");
     }
     @font-face {
-      font-family: Poppins-Bold;
-      src: url('fonts/Poppins-Bold.ttf') format("opentype");
+      font-family: Poppins-SemiBold;
+      src: url('fonts/Poppins-SemiBold.ttf') format("opentype");
     }
     @font-face {
       font-family: Poppins-Medium;
@@ -28,3 +28,53 @@ body{
       src: url('/fonts/Poppins-Light.ttf') format("opentype");
     }
   }
+
+  .fade-in {
+    animation: fadeIn ease 1s;
+  }
+  
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+  .scroll-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scroll-content {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.scroll-item {
+    flex: 0 0 auto;
+    width: 200px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    margin-right: 10px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.scroll-prev {
+    left: 0;
+}
+
+.scroll-next {
+    right: 0;
+}
