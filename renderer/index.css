@@ -37,8 +37,29 @@ body{
     0% {opacity:0;}
     100% {opacity:1;}
   }
+/* width */
+.scrollbarWidth::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
 
-  .scroll-container {
+.scrollbarTrack::-webkit-scrollbar-track {
+  background: #ebeaea;
+}
+
+/* Handle */
+.scrollbarThumb::-webkit-scrollbar-thumb {
+  background: #efc586;
+}
+
+/* Handle on hover */
+.scrollbarHover::-webkit-scrollbar-thumb:hover {
+  background: #c5964e;
+}
+
+.scroll-container {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -49,6 +70,7 @@ body{
     flex-wrap: nowrap;
     overflow-x: auto;
     scroll-behavior: smooth;
+    
 }
 
 .scroll-item {
@@ -61,7 +83,7 @@ body{
 
 .scroll-btn {
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;
@@ -73,8 +95,10 @@ body{
 
 .scroll-prev {
     left: 0;
+    color: #CBBF93;
 }
 
 .scroll-next {
     right: 0;
+    color: #CBBF93;
 }

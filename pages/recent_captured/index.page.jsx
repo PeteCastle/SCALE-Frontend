@@ -15,7 +15,7 @@ function Page() {
   const [capture, setCapture] = useState([]);
   const [devices, setDevices] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   useEffect(() => {
     const fetchSystem = async () => {
       try {
@@ -56,7 +56,6 @@ function Page() {
 
       const json1 = await response1.json();
       setData(json1);
-    
     } catch (err) {
       console.error("Unable to fetch data, server error");
     }
@@ -103,28 +102,6 @@ function Page() {
                       </button>
                     </li>
                   ))}
-                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
-                    <button className="w-full h-full font-semibold text-center">
-                      Miraiza Elisa Street
-                    </button>
-                  </li>
-                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
-                    <button className="w-full h-full font-semibold text-center">
-                      Miraiza Elisa Street
-                    </button>
-                  </li>
-                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
-                    <button className="w-full h-full font-semibold text-center">
-                      Miraiza Elisa Street
-                    </button>
-                  </li>
-                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
-                    <button className="w-full h-full font-semibold text-center">
-                      Miraiza Elisa Street
-                    </button>
-                  </li>
-                 
-                  
                 </ul>
               </div>
             </div>
@@ -134,7 +111,7 @@ function Page() {
                 <h1 className=" flex font-semibold justify-start mb-12">
                   No. of Detection count
                 </h1>
-                <p className="text-5xl font-bold">{data?.count || '0'}.00</p>
+                <p className="text-5xl font-bold">{data?.count || "0"}.00</p>
               </div>
             </div>
           </div>
@@ -146,51 +123,40 @@ function Page() {
               </h1>
               <div className="w-full h-[600px] mb-2 object-contain">
                 <figure className=" w-full h-full">
-                <img
-                  src={data?.image}
-                  className="w-full h-[600px] object-cover fade-in"
-                  alt={data?.name}
-                />
+                  <img
+                    src={selectedImageUrl || data?.image}
+                    className="w-full h-[600px] object-cover fade-in"
+                    alt={data?.name}
+                  />
                 </figure>
 
                 {/* <p>{selectedImage || data[0]?.name}ssss</p> */}
               </div>
               <div className="w-full h-[50px] flex justify-center items-center bg-[#CBBF93] rounded p-5">
-                DD/MM/YYYY | 00:00:00 AM | Location
-                {/* {selectedImage} */}
+                {selectedImageUrl ? "DD/MM/YYYY | 00:00:00 AM | Location" : ""}
               </div>
             </div>
           </div>
 
-          {/* Carousel */}
-          {/* <div className="col-span-5">
-            <div className="h-[200px]  mb-4 flex justify-center items-center gap-2 w-full overflow-x-auto overflow-y-hidden   border-2">
-              {data.map((item) => (
-                <img
-                  key={item.id}
-                  src={item.picture}
-                  className="w-[500px] h-[200px] p-4 object-cover cursor-pointer"
-                  alt=""
-                  onClick={() => setSelectedImage(item.picture)}
-                />
-              ))}
-            </div>
-          </div> */}
-
           <div className="col-span-5">
             <div className="scroll-container flex items-center justify-center">
-              <div className="scroll-content h-auto mb-4 gap-2 w-full overflow-x-auto overflow-y-hidden px-8">
+              <div className="scroll-content h-auto mb-4 gap-2 w-full overflow-x-auto overflow-y-hidden px-8 scrollbarWidth scrollbarTrack scrollbarThumb scrollbarHover">
                 {/* Your images here */}
                 {capture.map((item) => (
                   <img
-                    // key={item.id}
+                    key={item.id}
                     src={item.image}
-                    className="scroll-item w-[100px] h-[200px] object-cover cursor-pointer"
+                    className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
+                      selectedImageUrl === item.image
+                        ? "border-2 border-blue-500"
+                        : ""
+                    }`}
                     alt=""
-                    onClick={() => setSelectedImage(item.count)}
+                    onClick={() => setSelectedImageUrl(item.image)}
                   />
                 ))}
               </div>
+
               <button
                 className="scroll-btn scroll-prev"
                 onClick={scrollPrevHandler}
