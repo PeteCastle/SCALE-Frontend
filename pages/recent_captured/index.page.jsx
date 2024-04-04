@@ -1,44 +1,65 @@
 export { Page };
 import { useState, useEffect } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
-import API_LINK from "../../config/API";
+import { url } from "../../utils/contants";
+
 function Page() {
   const [currentLoc, setCurrectLoc] = useState("");
   const [data, setData] = useState([]);
-  const [capture, setCapture] = useState();
+  const [capture, setCapture] = useState([]);
+  const [devices, setDevices] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  const systemID = 1;
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSystem = async () => {
       try {
-        const captureHistoryResponse = await fetch(
-          `v1/system/1/captures/history?page_size=2&page=2`,
-         
-        );
-  
-        if (!captureHistoryResponse.ok) {
+        const response = await fetch(`${url}/v1/system/details`);
+
+        if (!response.ok) {
           throw new Error("Unable to fetch data");
         }
-        const captureHistoryData = await captureHistoryResponse.json();
-        setCapture(captureHistoryData);
-        console.log(captureHistoryData);
+        const json = await response.json();
+        setDevices(json);
+        console.log(json);
       } catch (err) {
         console.error("Unable to fetch data, server error");
       }
     };
-  
-    fetchData();
+
+    fetchSystem();
   }, []);
 
-  const handleLocation = (id) => {
-    console.log(id);
-    setCurrectLoc(id);
+  const fetchOne = async (id) => {
+    try {
+      const response = await fetch(
+        `${url}/v1/system/${id}/captures/history?page_size=2&page=2`
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to fetch data");
+      }
+
+      const response1 = await fetch(`${url}/v1/system/${id}/captures/recent`);
+
+      if (!response1.ok) {
+        throw new Error("Unable to fetch data");
+      }
+
+      const json = await response.json();
+      setCapture(json.results);
+
+      const json1 = await response1.json();
+      setData(json1);
+    
+    } catch (err) {
+      console.error("Unable to fetch data, server error");
+    }
   };
 
   const scrollByAmount = 200; // Adjust scroll amount as needed
@@ -70,25 +91,40 @@ function Page() {
                   <h1 className="font-semibold">Devices</h1>
                 </div>
               </div>
-              <div className="w-full h-full bg-[#F8F1D5] rounded">
-                <ul className="w-11/12 h-full m-auto pt-5 flex flex-col gap-5">
-                  {/* {data.map((val, key) => (
-                    <li className="w-full h-full max-h-12 border overflow-hidden rounded-full bg-[#F9F5E6]">
-                      <button className="w-full h-full font-semibold text-center">
-                        {val.location}
+              <div className="w-full h-full bg-[#F8F1D5] rounded ">
+                <ul className="w-11/12 h-full max-h-[425px]  overflow-auto m-auto">
+                  {devices.map((val, key) => (
+                    <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                      <button
+                        onClick={() => fetchOne(val.id)}
+                        className="w-full h-full font-semibold text-center"
+                      >
+                        {val.name}
                       </button>
                     </li>
-                  ))} */}
-                  <li className="w-full h-full max-h-12 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                  ))}
+                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
                     <button className="w-full h-full font-semibold text-center">
                       Miraiza Elisa Street
                     </button>
                   </li>
-                  <li className="w-full h-full max-h-12 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
                     <button className="w-full h-full font-semibold text-center">
                       Miraiza Elisa Street
                     </button>
                   </li>
+                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                    <button className="w-full h-full font-semibold text-center">
+                      Miraiza Elisa Street
+                    </button>
+                  </li>
+                  <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                    <button className="w-full h-full font-semibold text-center">
+                      Miraiza Elisa Street
+                    </button>
+                  </li>
+                 
+                  
                 </ul>
               </div>
             </div>
@@ -98,8 +134,7 @@ function Page() {
                 <h1 className=" flex font-semibold justify-start mb-12">
                   No. of Detection count
                 </h1>
-                <p className="text-5xl font-bold">20.00</p>
-                {/* <p>{selectedImage || data[0]?.name}ssss</p> */}s
+                <p className="text-5xl font-bold">{data?.count || '0'}.00</p>
               </div>
             </div>
           </div>
@@ -109,15 +144,14 @@ function Page() {
               <h1 className="font-semibold w-fit text-2xl px-5 py-2 bg-[#CBBF93] rounded-t">
                 Device Picture
               </h1>
-              <div className="w-full h-[600px] border-red-400 border-2 mb-2  rounded object-contain">
-                {/* <figure className=" w-full h-full"> */}
+              <div className="w-full h-[600px] mb-2 object-contain">
+                <figure className=" w-full h-full">
                 <img
-                  // src={selectedImage || data[0]?.picture} // Fallback to the first image if none is selected
-                  // src={data.find((item) => item.id === selectedImage)?.picture}
-                  className="w-full h-[600px] object-cover fade-in rounded"
-                  // alt={selectedImage || data[0]?.name}
+                  src={data?.image}
+                  className="w-full h-[600px] object-cover fade-in"
+                  alt={data?.name}
                 />
-                {/* </figure> */}
+                </figure>
 
                 {/* <p>{selectedImage || data[0]?.name}ssss</p> */}
               </div>
@@ -147,15 +181,15 @@ function Page() {
             <div className="scroll-container flex items-center justify-center">
               <div className="scroll-content h-auto mb-4 gap-2 w-full overflow-x-auto overflow-y-hidden px-8">
                 {/* Your images here */}
-                {/* {capture.map((item) => (
+                {capture.map((item) => (
                   <img
                     // key={item.id}
-                    src={item.picture}
+                    src={item.image}
                     className="scroll-item w-[100px] h-[200px] object-cover cursor-pointer"
                     alt=""
-                    onClick={() => setSelectedImage(item.id)}
+                    onClick={() => setSelectedImage(item.count)}
                   />
-                ))} */}
+                ))}
               </div>
               <button
                 className="scroll-btn scroll-prev"
