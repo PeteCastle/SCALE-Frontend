@@ -8,14 +8,14 @@ export default {
     "./node_modules/flowbite/**/*.js",
     'node_modules/flowbite-react/lib/esm/**/*.js'
 ],
-  theme: {
+   theme: {
     extend: {},
     fontFamily: {
       primary: "Poppins-Regular",
-      'bold': "Poppins-Bold",
+      'semibold': "Poppins-SemiBold",
       'light': "Poppins-Light",
       'medium': "Poppins-Medium",
-      'heavy': "Poppins-Heavy",
+      'heavy': "Poppins-Thin",
     },
 
   },
