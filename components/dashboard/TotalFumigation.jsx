@@ -3,6 +3,7 @@ import arrowgreen from "/arrow-green.svg";
 import iconsearch from "/search-fumigation.svg";
 import fumigation from "/mosquito-fumigation.svg";
 import arrowred from "/arrow-red.svg";
+import { url } from "../../utils/contants";
 
 const TotalFumigation = () => {
   const [totalFumigation, setTotalFumigation] = useState("");
@@ -10,7 +11,7 @@ const TotalFumigation = () => {
     const countFumigation = async () => {
       try {
         const response = await fetch(
-          `https://73135175-7b33-49a2-8e79-26b778b69ae8.mock.pstmn.io/v1/dashboard/fumigation/count?date=2024-03`
+          `${url}/v1/dashboard/fumigation/count?date=2024-03`
         );
         if (!response.ok) {
           throw new Error("Detected mosquito not found.");

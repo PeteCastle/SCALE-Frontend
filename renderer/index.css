@@ -13,7 +13,7 @@ body{
     }
     @font-face {
       font-family: Poppins-SemiBold;
-      src: url('fonts/Poppins-SemiBold.ttf') format("opentype");
+      src: url('/fonts/Poppins-SemiBold.ttf') format("opentype");
     }
     @font-face {
       font-family: Poppins-Medium;
