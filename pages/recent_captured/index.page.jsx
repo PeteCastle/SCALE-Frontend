@@ -79,6 +79,9 @@ function Page() {
     });
   };
 
+  const selectedImageTime = capture.find((item) => item.image === selectedImageUrl)?.time;
+const dateToPrint = selectedImageTime ? new Date(selectedImageTime).toDateString() : new Date().toDateString();
+const timeToPrint = selectedImageTime ? new Date(capture.find((item) => item.image === selectedImageUrl)?.time).toLocaleTimeString() : new Date().toLocaleTimeString();
   return (
     <>
       <section className="w-full h-full max-h-screen py-5 my-4  gap-5">
@@ -93,7 +96,7 @@ function Page() {
               <div className="w-full h-full bg-[#F8F1D5] rounded ">
                 <ul className="w-11/12 h-full max-h-[425px]  overflow-auto m-auto">
                   {devices.map((val, key) => (
-                    <li className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
+                    <li key={key} className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]">
                       <button
                         onClick={() => fetchOne(val.id)}
                         className="w-full h-full font-semibold text-center"
@@ -124,7 +127,7 @@ function Page() {
               <div className="w-full h-[600px] mb-2 object-contain">
                 <figure className=" w-full h-full">
                   <img
-                    src={selectedImageUrl || data?.image}
+                    src={capture.find((item) => item.image === selectedImageUrl)?.image}
                     className="w-full h-[600px] object-cover fade-in"
                     alt={data?.name}
                   />
@@ -133,7 +136,7 @@ function Page() {
                 {/* <p>{selectedImage || data[0]?.name}ssss</p> */}
               </div>
               <div className="w-full h-[50px] flex justify-center items-center bg-[#CBBF93] rounded p-5">
-                {selectedImageUrl ? "DD/MM/YYYY | 00:00:00 AM | Location" : ""}
+                {selectedImageUrl ? `${dateToPrint} | ${timeToPrint} | Location` : ""}
               </div>
             </div>
           </div>

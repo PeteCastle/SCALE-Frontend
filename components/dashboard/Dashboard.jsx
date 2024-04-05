@@ -24,6 +24,7 @@ import {
 } from "recharts";
 import TotalMosquito from "./TotalMosquito";
 import TotalFumigation from "./TotalFumigation";
+import WaterLevel from "./WaterLevel";
 
 const Dashboard = () => {
 
@@ -234,47 +235,7 @@ const Dashboard = () => {
             <TotalFumigation/>
            <TotalMosquito/>
           </div>
-          <div className="xl:col-span-3 xl:row-span-2 bg-[#ECF4C6] rounded-xl shadow-md p-5 flex flex-col gap-5">
-            <h1 className="font-bold text-xl xl:text-2xl">
-              Fumigation Water Level
-            </h1>
-            <div className="w-full h-60 xl:h-full ">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  width={500}
-                  height={300}
-                  data={data}
-                  margin={{
-                    top: 5,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} />
-                  <YAxis tick={{ fontSize: 10 }} interval={0} />
-                  <Tooltip />
-                  {/* <Legend/> */}
-                  <Bar
-                    radius={[10, 10, 0, 0]}
-                    dataKey="Detected Mosquito"
-                    fill="rgba(224,189,104)"
-                    activeBar={
-                      <Rectangle
-                        fill="rgba(224,189,104)"
-                        stroke="rgba(224,189,104)"
-                      />
-                    }
-                  />
-                  <Bar
-                    radius={[10, 10, 0, 0]}
-                    dataKey="Number of Recent Fumigation Efforts"
-                    fill="black"
-                    activeBar={<Rectangle fill="black" stroke="black" />}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+         <WaterLevel/>
         </div>
       </div>
 
@@ -284,53 +245,53 @@ const Dashboard = () => {
           <div className="xl:col-span-2 pt-5 flex flex-col gap-5">
             <h1 className="font-bold text-2xl pl-5">KPIs</h1>
             <div className="h-full grid xl:grid-cols-2 xl:grid-rows-2 gap-5">
-              <div className=" relative col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
+              <div className="col-span-1 row-span-1 border rounded-xl shadow-md  bg-[#EBEEE8] p-5">
                 <p className="font-semibold">Average Inference Time</p>
                 <figure>
                   <img src={clock} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                {/* <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-green-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
-                </div>
+                </div> */}
               </div>
-              <div className=" relative col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
+              <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
                 <p className="font-semibold">Average Confidence</p>
                 <figure>
                   <img src={star} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                {/* <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-red-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
-                </div>
+                </div> */}
               </div>
-              <div className=" relative col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
+              <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
                 <p className="font-semibold">Precision Score</p>
                 <figure>
                   <img src={target} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                {/* <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-red-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
-                </div>
+                </div> */}
               </div>
-              <div className=" relative col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
+              <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
                 <p className="font-semibold">Recall Score</p>
                 <figure>
                   <img src={bulb} alt="" />
                 </figure>
                 <p className="font-bold text-4xl">20.00</p>
-                <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
+                {/* <div className="absolute left-0 top-0 pr-5 xl:pr-2 2xl:pr-5 w-full h-full flex items-center justify-end ">
                   <p className="2xl:text-3xl bg-green-500/40 rounded-full text-black px-4 p-2">
                     + 10.12
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
