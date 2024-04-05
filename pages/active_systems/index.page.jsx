@@ -28,7 +28,7 @@ function Page() {
   useEffect(() => {
     const fetchDevices = async () => {
       try {
-        const response = await fetch(`http://152.42.220.91/v1/system/list`);
+        const response = await fetch(`${url}/v1/system/list`);
         if (!response.ok) {
           throw new Error("Unable to detch Data");
         }
@@ -55,8 +55,8 @@ function Page() {
                   <div className="w-full h-full max-w-3 max-h-3 bg-white rounded-full"></div>
                 </div>
               </div>
-              <div className="size-full bg-[#F8F1D5] rounded-b-xl flex">
-                <div className="w-11/12 m-auto h-full flex items-center ">
+              <div className="w-full md:h-full h-20 bg-[#F8F1D5] rounded-b-md flex">
+                <div className="w-11/12 m-auto h-full  flex items-center ">
                   <div className="relative w-full">
                     <button
                       onClick={() => setIsDropdown((prevState) => !prevState)}
@@ -88,7 +88,7 @@ function Page() {
                       } absolute z-10 w-full max-h-60 overflow-auto bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
                     >
                       <ul
-                        className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        className="w-full py-2 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownDefaultButton"
                       >
                         {data.map((val, key) => (
@@ -101,6 +101,13 @@ function Page() {
                             </button>
                           </li>
                         ))}
+                        {data.length <= 0 && (
+                          <li className="w-full">
+                            <button className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                              No Data
+                            </button>
+                          </li>
+                        )}
                       </ul>
                     </div>
                   </div>
@@ -108,17 +115,17 @@ function Page() {
               </div>
             </div>
 
-            <div className="row-span-5 overflow-hidden border rounded-2xl">
-              <div className="max-h-10 h-full w-full bg-[#CBBF93]">
+            <div className="row-span-5 overflow-hidden border rounded-xl flex flex-col">
+              <div className="max-h-10 h-10 md:h-full w-full bg-[#CBBF93]">
                 <div className="w-11/12 m-auto h-full flex items-center justify-between ">
                   <h1 className="font-semibold">Devices</h1>
                   <div className="w-full h-full max-w-3 max-h-3 bg-white rounded-full"></div>
                 </div>
               </div>
-              <div className="w-full h-full bg-[#F8F1D5]">
-                <ul className="w-11/12 h-full m-auto pt-5 flex flex-col gap-5">
+              <div className="w-full h-full bg-[#F8F1D5] p-2">
+                <ul className="w-11/12 h-full m-auto flex flex-wrap flex-col gap-5">
                   {devices.map((val, key) => (
-                    <li className="w-full h-full max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
+                    <li className="md:w-full h-full max-h-10 rounded-sm md:max-h-12 border overflow-hidden md:rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
                       <button
                         onClick={() => setCurrectLoc(val.id)}
                         className="w-full h-full font-semibold text-center"
@@ -136,14 +143,13 @@ function Page() {
               <h1 className="font-semibold w-fit px-5 py-2 bg-[#CBBF93]">
                 Device Picture
               </h1>
-              <div className="w-full h-full object-contain">
-                <figure className="border w-full h-full">
-                  <img
-                    src={data.find((item) => item.id === currentLoc)?.image}
-                    alt=""
-                  />
-                </figure>
-              </div>
+              <figure className="w-full h-full">
+                <img
+                  className="w-full h-full border border-black  object-contain"
+                  src={data.find((item) => item.id === currentLoc)?.image}
+                  alt=""
+                />
+              </figure>
             </div>
             <div className="row-span-2 flex flex-col pb-5 md:pb-0">
               <h1 className="font-semibold w-fit px-5 py-2 bg-[#CBBF93]">

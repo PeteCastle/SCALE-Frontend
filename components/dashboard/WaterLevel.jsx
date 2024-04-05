@@ -9,35 +9,32 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { url } from "../../utils/contants";
 
 const WaterLevel = () => {
-  const data = [
-    {
-      name: "12 Hours",
-      "Detected Mosquito": 25,
-      "Number of Recent Fumigation Efforts": 70,
-    },
-    {
-      name: "8 Hours",
-      "Detected Mosquito": 5,
-      "Number of Recent Fumigation Efforts": 60,
-    },
-    {
-      name: "4 Hours",
-      "Detected Mosquito": 10,
-      "Number of Recent Fumigation Efforts": 50,
-    },
-    {
-      name: "2 Hours",
-      "Detected Mosquito": 15,
-      "Number of Recent Fumigation Efforts": 40,
-    },
-    {
-      name: "1 Hour",
-      "Detected Mosquito": 20,
-      "Number of Recent Fumigation Efforts": 30,
-    },
-  ];
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${url}/v1/dashboard/water_level/status`);
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch data");
+        }
+        const json = await response.json();
+        const data = Object.entries(json).map(([name, Water]) => ({ name, Water }));
+        setData(data);
+        console.log(data);
+      } catch (err) {
+        console.error("Unable to fetch data, server error");
+      }
+    };
+
+    fetchData()
+  }, []);
+
   return (
     <div className="xl:col-span-3 xl:row-span-2 bg-[#ECF4C6] rounded-xl shadow-md p-5 flex flex-col gap-5">
       <h1 className="font-bold text-xl xl:text-2xl">Fumigation Water Level</h1>
@@ -53,13 +50,13 @@ const WaterLevel = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} />
+            <XAxis dataKey={"name"}  tick={{ fontSize: 10 }} interval={0} />
             <YAxis tick={{ fontSize: 10 }} interval={0} />
             <Tooltip />
             {/* <Legend/> */}
             <Bar
               radius={[10, 10, 0, 0]}
-              dataKey="Detected Mosquito"
+              dataKey="Water"
               fill="rgba(224,189,104)"
               activeBar={
                 <Rectangle
@@ -67,12 +64,6 @@ const WaterLevel = () => {
                   stroke="rgba(224,189,104)"
                 />
               }
-            />
-            <Bar
-              radius={[10, 10, 0, 0]}
-              dataKey="Number of Recent Fumigation Efforts"
-              fill="black"
-              activeBar={<Rectangle fill="black" stroke="black" />}
             />
           </BarChart>
         </ResponsiveContainer>

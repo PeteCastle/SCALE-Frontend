@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import arrowgreen from "/arrow-green.svg";
 import iconsearch from "/search-fumigation.svg";
+import { url } from "../../utils/contants";
 const TotalMosquito = () => {
-    const [totalMosquito, setTotalMosquito] = useState('')
+  const [totalMosquito, setTotalMosquito] = useState("");
+  
   useEffect(() => {
     const countMosquito = async () => {
       try {
         const response = await fetch(
-          `https://73135175-7b33-49a2-8e79-26b778b69ae8.mock.pstmn.io/v1/dashboard/detections/count?date=2024-03`)
-        if(!response.ok){
-            throw new Error("Detected mosquito not found.")
+          `${url}/v1/dashboard/detections/count?date=2024-03`
+        );
+        if (!response.ok) {
+          throw new Error("Detected mosquito not found.");
         }
-        const json = await response.json()
-        console.log(json.total)
-        setTotalMosquito(json.total)
+        const json = await response.json();
+        console.log(json.total);
+        setTotalMosquito(json.total);
       } catch (err) {
-        console.log(err.message)
-        throw new Error("Server Error")
+        console.log(err.message);
+        throw new Error("Server Error");
       }
     };
 
-    countMosquito()
+    countMosquito();
   }, [setTotalMosquito]);
 
   return (
@@ -30,7 +33,11 @@ const TotalMosquito = () => {
         <figure>
           <img src={iconsearch} alt="" />
         </figure>
-        <p className="text-4xl font-bold">{Number(totalMosquito).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+        <p className="text-4xl font-bold">
+          {Number(totalMosquito)
+            .toFixed(0)
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </p>
         <p
           className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-green-800 font-semibold`}
         >
