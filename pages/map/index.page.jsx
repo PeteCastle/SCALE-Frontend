@@ -7,10 +7,10 @@ function Page() {
   const [data, setData] = useState([]);
   const [areas, setAreas] = useState([]);
 
-  const fetchSpecificArea = async (id) => {
+  const fetchSpecificArea = async (area_id) => {
     try {
       const response = await fetch(
-        `${url}/v1/coverage/${id}`
+        `${url}/v1/coverage/${area_id}`
       );
 
       if (!response.ok) {
@@ -19,8 +19,9 @@ function Page() {
 
 
       const json = await response.json();
-      setData(json.systems);
+      setData(json);
       setCurrectLoc(json.id)
+      console.log()
     } catch (err) {
       console.error("Unable to fetch data, server error");
     }
@@ -53,7 +54,6 @@ function Page() {
         }
         const json = await response.json();
         setAreas(json);
-        console.log(json);
       } catch (err) {
         console.error("Unable to fetch data, server error");
       }
@@ -75,9 +75,9 @@ function Page() {
                 </div>
               </div>
               <div className="w-full h-full bg-[#F8F1D5]">
-                <ul className="w-11/12 h-full m-auto pt-5 flex flex-col gap-5">
+                <ul className="w-11/12 h-full max-h-[175px]  xl:max-h-[675px] 2xl:max-h-[800px] overflow-auto m-auto">
                   {areas.map((val, key) => (
-                    <li className="w-full h-full max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
+                    <li key={key} className="w-full h-full mt-5 max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
                       <button 
                       onClick={() => fetchSpecificArea(val.id) }
                       className="w-full h-full font-semibold text-center">
@@ -97,7 +97,7 @@ function Page() {
               <div className="w-full h-full object-contain">
                 <figure className="border w-full h-full">
                   <img
-                    src={data.find((item) => item.id === currentLoc)?.image}
+                    src={data?.image}
                     alt=""
                   />
                 </figure>
@@ -108,7 +108,7 @@ function Page() {
                 Area Description
               </h1>
               <div className="border w-full h-full p-5">
-                {data.find((item) => item.id === currentLoc)?.description}
+                {data?.description}
               </div>
             </div>
           </div>

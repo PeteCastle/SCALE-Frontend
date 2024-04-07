@@ -50,20 +50,14 @@ const WaterLevel = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={"name"}  tick={{ fontSize: 10 }} interval={0} />
+            <XAxis dataKey={"name"}  tick={{fontSize: 10}} interval={"preserveStartEnd"} />
             <YAxis tick={{ fontSize: 10 }} interval={0} />
             <Tooltip />
-            {/* <Legend/> */}
             <Bar
               radius={[10, 10, 0, 0]}
               dataKey="Water"
               fill="rgba(224,189,104)"
-              activeBar={
-                <Rectangle
-                  fill="rgba(224,189,104)"
-                  stroke="rgba(224,189,104)"
-                />
-              }
+             
             />
           </BarChart>
         </ResponsiveContainer>
