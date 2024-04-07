@@ -1,14 +1,11 @@
 export { Page };
 import { useState, useEffect } from "react";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import { url } from "../../utils/contants";
-
+import { GrSelect } from "react-icons/gr";
 function Page() {
   const [defaultCarousel, setDefaultCarousel] = useState();
   const [defaultImg, setDefaultImg] = useState();
@@ -18,6 +15,9 @@ function Page() {
   const [recent, setRecent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+  const [selectedCapture, setSelectedCapture] = useState(null); // New state for selected capture data
+  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
+  const [showPlaceholder, setShowPlaceholder] = useState(false); // State to control placeholder visibility
 
   useEffect(() => {
     const fetchOne = async () => {
@@ -49,8 +49,6 @@ function Page() {
 
     fetchOne();
   }, []);
-
-  // const recentOne =
 
   useEffect(() => {
     const fetchRecent = async () => {
@@ -93,6 +91,8 @@ function Page() {
 
   const fetchOne = async (id) => {
     try {
+      setSelectedDeviceId(id);
+      setShowPlaceholder(true); // Display placeholder text when a device is selected
       const response = await fetch(
         `${url}/v1/system/${id}/captures/history?page_size=2&page=2`
       );
@@ -115,6 +115,22 @@ function Page() {
       console.error("Unable to fetch data, server error");
     }
   };
+
+  useEffect(() => {
+    if (selectedDeviceId !== null) {
+      setSelectedImageUrl(null);
+      setSelectedCapture(null); // Reset selected capture data when a new device is selected
+      setShowPlaceholder(true); // Display placeholder text when a device is selected
+    }
+  }, [selectedDeviceId]);
+
+  useEffect(() => {
+    if (selectedImageUrl !== null) {
+      const selected = capture.find((item) => item.image === selectedImageUrl);
+      setSelectedCapture(selected); // Update selected capture data when a new image is selected
+      setShowPlaceholder(false); // Hide placeholder text when an image is selected
+    }
+  }, [selectedImageUrl, capture]);
 
   const scrollByAmount = 200; // Adjust scroll amount as needed
 
@@ -143,17 +159,21 @@ function Page() {
     });
   };
 
-  const selectedImageTime = capture.find(
-    (item) => item.image === selectedImageUrl
-  )?.time;
-  const dateToPrint = selectedImageTime
-    ? new Date(selectedImageTime).toDateString()
-    : new Date().toDateString();
-  const timeToPrint = selectedImageTime
-    ? new Date(
-        capture.find((item) => item.image === selectedImageUrl)?.time
-      ).toLocaleTimeString()
-    : new Date().toLocaleTimeString();
+  const selectImageFromCarousel = (imageUrl) => {
+    setSelectedImageUrl(imageUrl);
+  };
+
+  const dateToPrint = selectedCapture
+    ? new Date(selectedCapture.time).toDateString()
+    : new Date(recent?.time).toDateString();
+  const timeToPrint = selectedCapture
+    ? new Date(selectedCapture.time).toLocaleTimeString()
+    : new Date(recent?.time).toLocaleTimeString();
+
+  const locationToPrint = selectedCapture
+    ? selectedCapture.location
+    : "Location not found";
+
   return (
     <>
       <section className="w-full h-full max-h-screen py-5 my-4  gap-5">
@@ -201,30 +221,29 @@ function Page() {
               <h1 className="font-semibold w-fit text-2xl px-5 py-2 bg-[#CBBF93] rounded-t">
                 Device Picture
               </h1>
-              <div className="w-full h-[600px] mb-2 object-contain">
-                <figure className=" w-full h-full">
-                  <img
-                    src={
-                      !selectedImageUrl
-                        ? mostRecent?.image
-                        : capture.find(
-                            (item) => item.image === selectedImageUrl
-                          )?.image
-                    }
-                    className="w-full h-[600px] object-cover fade-in"
-                    alt={data?.name}
-                  />
+              <div className="w-full h-[600px] mb-2 object-contain flex justify-center items-center">
+                <figure className="w-full h-full">
+                  {selectedImageUrl ? (
+                    <img
+                      src={selectedImageUrl}
+                      className="w-full h-[600px] object-fit fade-in"
+                      alt={data?.name}
+                    />
+                  ) : (
+                    <div className="w-full h-[600px] bg-gray-200 flex justify-center content-center mx-auto items-center">
+                    <soan className="text-gray-500">   <GrSelect /></soan>
+                      <span className="text-gray-500 text-lg font-semibold ">
+                        Please select a recent captured image
+                      </span>
+                    </div>
+                  )}
                 </figure>
               </div>
+
               <div className="w-full h-[50px] flex justify-center items-center bg-[#CBBF93] rounded p-5">
-                {selectedImageUrl
-                  ? `${dateToPrint} | ${timeToPrint} | ${
-                      capture.find((item) => item.image === selectedImageUrl)
-                        ?.location
-                    }`
-                  : `${new Date(recent?.time).toDateString()} | ${new Date(
-                      recent?.time
-                    ).toLocaleTimeString()}`}
+                {selectedImageUrl && locationToPrint
+                  ? `${dateToPrint} | ${timeToPrint} | ${locationToPrint}`
+                  : "No Details found"}
               </div>
             </div>
           </div>
@@ -244,7 +263,7 @@ function Page() {
                             : ""
                         }`}
                         alt=""
-                        onClick={() => setSelectedImageUrl(item.image)}
+                        onClick={() => selectImageFromCarousel(item.image)}
                       />
                     ))
                   : defaultCarousel?.map((item) => (
@@ -257,7 +276,7 @@ function Page() {
                             : ""
                         }`}
                         alt=""
-                        onClick={() => setSelectedImageUrl(item.image)}
+                        onClick={() => selectImageFromCarousel(item.image)}
                       />
                     ))}
               </div>
