@@ -5,8 +5,9 @@ function Page() {
   const [currentLoc, setCurrectLoc] = useState("");
   const [data, setData] = useState([]);
   const [devices, setDevices] = useState([]);
+  const [currentDevice, setCurrentDev] = useState();
   const [isDropdown, setIsDropdown] = useState(false);
-
+  const [system, setSystem] = useState()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,6 +27,24 @@ function Page() {
   }, []);
 
   useEffect(() => {
+    const fetchArea = async () => {
+      try {
+        const response = await fetch(`${url}/v1/coverage/${currentLoc}`);
+        if (!response.ok) {
+          throw new Error("Unable to detch Data");
+        }
+        const json = await response.json();
+        setSystem(json.systems);
+        console.log(json)
+      } catch (err) {
+        console.error("Unable to fetch data, server error");
+      }
+    };
+
+    fetchArea();
+  }, [currentLoc]);
+
+  useEffect(() => {
     const fetchDevices = async () => {
       try {
         const response = await fetch(`${url}/v1/system/list`);
@@ -42,6 +61,11 @@ function Page() {
 
     fetchDevices();
   }, []);
+
+  const handleDropdown = (id) => {
+    setCurrectLoc(id);
+    setIsDropdown(false);
+  };
 
   return (
     <>
@@ -94,7 +118,7 @@ function Page() {
                         {data.map((val, key) => (
                           <li key={key}>
                             <button
-                              onClick={() => setCurrectLoc(val.id)}
+                              onClick={() => handleDropdown(val.id)}
                               className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
                               {val.location.name}
@@ -123,11 +147,11 @@ function Page() {
                 </div>
               </div>
               <div className="w-full h-full bg-[#F8F1D5] p-2">
-                <ul className="w-11/12 h-full m-auto flex flex-wrap flex-col gap-5">
-                  {devices.map((val, key) => (
-                    <li className="md:w-full h-full max-h-10 rounded-sm md:max-h-12 border overflow-hidden md:rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
+                <ul className="w-11/12 h-full max-h-[175px]  xl:max-h-[525px] 2xl:max-h-[625px] overflow-auto m-auto">
+                  {system?.map((val, key) => (
+                    <li className="md:w-full h-full mt-5 max-h-10 rounded-sm md:max-h-12 border overflow-hidden md:rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
                       <button
-                        onClick={() => setCurrectLoc(val.id)}
+                        onClick={() => setCurrentDev(val.id)}
                         className="w-full h-full font-semibold text-center"
                       >
                         {val.name}
@@ -145,18 +169,29 @@ function Page() {
               </h1>
               <figure className="w-full h-full">
                 <img
-                  className="w-full h-full border border-black  object-contain"
-                  src={data.find((item) => item.id === currentLoc)?.image}
+                  className="w-full h-full border  object-contain"
+                  src={system?.find((item) => item.id === currentDevice)?.image}
                   alt=""
                 />
               </figure>
             </div>
-            <div className="row-span-2 flex flex-col pb-5 md:pb-0">
+            <div className="row-span-2 h-full flex flex-col pb-5 md:pb-0">
               <h1 className="font-semibold w-fit px-5 py-2 bg-[#CBBF93]">
                 Device Description
               </h1>
               <div className="border w-full h-full p-5">
-                {data.find((item) => item.id === currentLoc)?.description}
+                <p className="w-full flex">
+                  <span className="w-24">Location:</span>
+                  <span className=" font-semibold">
+                    {system?.find((item) => item.id === currentDevice)?.location.name}
+                  </span>
+                </p>
+                <p className="w-full flex">
+                  <span className="w-24">Status:</span>
+                  <span className="font-semibold">
+                    {system?.find((item) => item.id === currentDevice)?.status}
+                  </span>
+                </p>
               </div>
             </div>
           </div>

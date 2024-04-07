@@ -10,12 +10,67 @@ import {
 import { url } from "../../utils/contants";
 
 function Page() {
-  const [currentLoc, setCurrectLoc] = useState("");
+  const [defaultCarousel, setDefaultCarousel] = useState();
+  const [defaultImg, setDefaultImg] = useState();
   const [data, setData] = useState([]);
   const [capture, setCapture] = useState([]);
   const [devices, setDevices] = useState([]);
+  const [recent, setRecent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+
+  useEffect(() => {
+    const fetchOne = async () => {
+      try {
+        const response = await fetch(
+          `${url}/v1/system/1/captures/history?page_size=2&page=2`
+        );
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch data");
+        }
+
+        const json = await response.json();
+
+        const value = json.results?.reduce(
+          (prev, current) => {
+            const prevTime = new Date(prev.time);
+            const currentTime = new Date(current.time);
+            return prevTime > currentTime ? prev : current;
+          },
+          [0]
+        );
+        setDefaultImg(value.image);
+        setDefaultCarousel(json.results);
+      } catch (err) {
+        console.error("Unable to fetch data, server error");
+      }
+    };
+
+    fetchOne();
+  }, []);
+
+  // const recentOne =
+
+  useEffect(() => {
+    const fetchRecent = async () => {
+      try {
+        const response = await fetch(`${url}/v1/system/1/captures/recent`);
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch data");
+        }
+
+        const json = await response.json();
+        setRecent(json);
+      } catch (err) {
+        console.error("Unable to fetch data, server error");
+      }
+    };
+
+    fetchRecent();
+  }, []);
+
   useEffect(() => {
     const fetchSystem = async () => {
       try {
@@ -24,6 +79,7 @@ function Page() {
         if (!response.ok) {
           throw new Error("Unable to fetch data");
         }
+
         const json = await response.json();
         setDevices(json);
         console.log(json);
@@ -53,7 +109,6 @@ function Page() {
 
       const json = await response.json();
       setCapture(json.results);
-
       const json1 = await response1.json();
       setData(json1);
     } catch (err) {
@@ -62,6 +117,15 @@ function Page() {
   };
 
   const scrollByAmount = 200; // Adjust scroll amount as needed
+
+  const mostRecent = capture?.reduce(
+    (prev, current) => {
+      const prevTime = new Date(prev.time);
+      const currentTime = new Date(current.time);
+      return prevTime > currentTime ? prev : current;
+    },
+    [0]
+  );
 
   const scrollPrevHandler = () => {
     const scrollContent = document.querySelector(".scroll-content");
@@ -125,7 +189,9 @@ function Page() {
                 <h1 className=" flex font-semibold justify-start mb-12">
                   No. of Detection count
                 </h1>
-                <p className="text-5xl font-bold">{data?.count || "0"}.00</p>
+                <p className="text-5xl font-bold">
+                  {data?.count || recent?.count}.00
+                </p>
               </div>
             </div>
           </div>
@@ -139,20 +205,26 @@ function Page() {
                 <figure className=" w-full h-full">
                   <img
                     src={
-                      capture.find((item) => item.image === selectedImageUrl)
-                        ?.image
+                      !selectedImageUrl
+                        ? mostRecent?.image
+                        : capture.find(
+                            (item) => item.image === selectedImageUrl
+                          )?.image
                     }
                     className="w-full h-[600px] object-cover fade-in"
                     alt={data?.name}
                   />
                 </figure>
-
-                {/* <p>{selectedImage || data[0]?.name}ssss</p> */}
               </div>
               <div className="w-full h-[50px] flex justify-center items-center bg-[#CBBF93] rounded p-5">
                 {selectedImageUrl
-                  ? `${dateToPrint} | ${timeToPrint} | Location`
-                  : ""}
+                  ? `${dateToPrint} | ${timeToPrint} | ${
+                      capture.find((item) => item.image === selectedImageUrl)
+                        ?.location
+                    }`
+                  : `${new Date(recent?.time).toDateString()} | ${new Date(
+                      recent?.time
+                    ).toLocaleTimeString()}`}
               </div>
             </div>
           </div>
@@ -161,23 +233,33 @@ function Page() {
             <div className="scroll-container flex items-center justify-center">
               <div className="scroll-content h-auto mb-4 gap-2 w-full overflow-x-auto overflow-y-hidden px-8 scrollbarWidth scrollbarTrack scrollbarThumb scrollbarHover">
                 {/* Your images here */}
-                {capture.map((item) => (
-                  <img
-                    key={item.id}
-                    src={item.image}
-                    className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                      selectedImageUrl === item.image
-                        ? "border-2 border-blue-500"
-                        : ""
-                    }`}
-                    alt=""
-                    onClick={() => setSelectedImageUrl(item.image)}
-                  />
-                ))}
-                <img
-                  className={`scroll-item border w-full max-w-28 max-h-16 md:max-w-[200px] h-full  md:max-h-[100px] object-cover cursor-pointer`}
-                  alt=""
-                />
+                {capture && capture.length > 0
+                  ? capture.map((item) => (
+                      <img
+                        key={item.id}
+                        src={item.image}
+                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
+                          selectedImageUrl === item.image
+                            ? "border-2 border-blue-500"
+                            : ""
+                        }`}
+                        alt=""
+                        onClick={() => setSelectedImageUrl(item.image)}
+                      />
+                    ))
+                  : defaultCarousel?.map((item) => (
+                      <img
+                        key={item.id}
+                        src={item.image}
+                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
+                          selectedImageUrl === item.image
+                            ? "border-2 border-blue-500"
+                            : ""
+                        }`}
+                        alt=""
+                        onClick={() => setSelectedImageUrl(item.image)}
+                      />
+                    ))}
               </div>
 
               <button
