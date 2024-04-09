@@ -6,6 +6,7 @@ import {
 } from "react-icons/io";
 import { url } from "../../utils/contants";
 import { GrSelect } from "react-icons/gr";
+
 function Page() {
   const [defaultCarousel, setDefaultCarousel] = useState();
   const [defaultImg, setDefaultImg] = useState();
@@ -17,6 +18,7 @@ function Page() {
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [selectedCapture, setSelectedCapture] = useState(null); // New state for selected capture data
   const [selectedDeviceId, setSelectedDeviceId] = useState(null);
+  const [selectedDeviceName, setSelectedDeviceName] = useState(null);
   const [showPlaceholder, setShowPlaceholder] = useState(false); // State to control placeholder visibility
 
   useEffect(() => {
@@ -89,9 +91,10 @@ function Page() {
     fetchSystem();
   }, []);
 
-  const fetchOne = async (id) => {
+  const fetchOne = async (id, name) => {
     try {
       setSelectedDeviceId(id);
+      setSelectedDeviceName(name); // Set the selected device name
       setShowPlaceholder(true); // Display placeholder text when a device is selected
       const response = await fetch(
         `${url}/v1/system/${id}/captures/history?page_size=2&page=2`
@@ -176,7 +179,7 @@ function Page() {
 
   return (
     <>
-      <section className="w-full h-full max-h-screen py-5 my-4  gap-5">
+      <section className="w-full h-full max-h-screen py-5 my-4 gap-5">
         <div className=" w-11/12 m-auto h-full flex flex-col md:grid md:grid-cols-5 gap-5">
           <div className="md:col-span-1 grid grid-cols-1 grid-rows-6 gap-5">
             <div className="row-span-4 overflow-hidden border rounded-2xl">
@@ -186,15 +189,19 @@ function Page() {
                 </div>
               </div>
               <div className="w-full h-full bg-[#F8F1D5] rounded ">
-                <ul className="w-11/12 h-full max-h-[425px]  overflow-auto m-auto">
+                <ul className="w-11/12 h-full max-h-[425px] overflow-auto m-auto">
                   {devices.map((val, key) => (
                     <li
                       key={key}
                       className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]"
                     >
                       <button
-                        onClick={() => fetchOne(val.id)}
-                        className="w-full h-full font-semibold text-center"
+                        onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
+                        className={`w-full h-full font-semibold text-center ${
+                          selectedDeviceId === val.id
+                            ? "border-2 border-blue-500 rounded-full"
+                            : ""
+                        }`}
                       >
                         {val.name}
                       </button>
@@ -231,9 +238,12 @@ function Page() {
                     />
                   ) : (
                     <div className="w-full h-[600px] bg-gray-200 flex justify-center content-center mx-auto items-center">
-                    <soan className="text-gray-500">   <GrSelect /></soan>
-                      <span className="text-gray-500 text-lg font-semibold ">
-                        Please select a recent captured image
+                      <span className="text-gray-500">
+                        <GrSelect />
+                      </span>
+                      <span className="text-gray-500 text-lg font-semibold">
+                        Please select a recent captured image for
+                       <span className="text-gray-800 font-semibold"> {selectedDeviceName ? `${selectedDeviceName}` : ""}</span>
                       </span>
                     </div>
                   )}

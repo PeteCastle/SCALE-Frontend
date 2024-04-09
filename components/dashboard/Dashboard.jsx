@@ -7,8 +7,14 @@ import TotalMosquito from "./TotalMosquito";
 import TotalFumigation from "./TotalFumigation";
 import WaterLevel from "./WaterLevel";
 import Performance from "./Performance";
-
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 const Dashboard = () => {
+  const [date, setDate] = useState(new Date());
+
+  const onChange = (newDate) => {
+    setDate(newDate);
+  };
   const dataPie = [
     { name: "Week 1", value: 7.7, color: "#6C724B" },
     { name: "Week 2", value: 46.2, color: "#B7BE92" },
@@ -36,7 +42,17 @@ const Dashboard = () => {
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full h-full grid gap-5 xl:grid-cols-2">
           <div className="col-span-1">
-            <div className="w-full h-full border"></div>
+            <div className="w-full h-full border py-4 content-center">
+              <h1 className=" flex mx-auto justify-center items-center mb-4 font-semibold ">
+                Calendar Example
+              </h1>
+              <Calendar
+                className="mx-auto justify-center items-center font-semibold w-12/12"
+               
+                onChange={onChange}
+                value={date}
+              />
+            </div>
           </div>
           <div className="w-full h-full col-span-1">
             <div className="w-full border h-full max-h-[350px] xl:max-h-none flex flex-col xl:p-5">
