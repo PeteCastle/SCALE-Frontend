@@ -9,41 +9,38 @@ function Page() {
 
   const fetchSpecificArea = async (area_id) => {
     try {
-      const response = await fetch(
-        `${url}/v1/coverage/${area_id}`
-      );
+      const response = await fetch(`${url}/v1/coverage/${area_id}`);
 
       if (!response.ok) {
         throw new Error("Unable to fetch data");
       }
 
-
       const json = await response.json();
       setData(json);
-      setCurrectLoc(json.id)
-      console.log()
+      setCurrectLoc(json.id);
+      console.log(json);
     } catch (err) {
       console.error("Unable to fetch data, server error");
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`${url}/v1/system/details`);
-  //       if (!response.ok) {
-  //         throw new Error("Unable to detch Data");
-  //       }
-  //       const json = await response.json();
-  //       setData(json);
-  //       console.log(json);
-  //     } catch (err) {
-  //       console.error("Unable to fetch data, server error");
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${url}/v1/system/details`);
+        if (!response.ok) {
+          throw new Error("Unable to detch Data");
+        }
+        const json = await response.json();
+        setData(json);
+        console.log(json);
+      } catch (err) {
+        console.error("Unable to fetch data, server error");
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchArea = async () => {
@@ -77,10 +74,14 @@ function Page() {
               <div className="w-full h-full bg-[#F8F1D5]">
                 <ul className="w-11/12 h-full max-h-[175px]  xl:max-h-[675px] 2xl:max-h-[800px] overflow-auto m-auto">
                   {areas.map((val, key) => (
-                    <li key={key} className="w-full h-full mt-5 max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
-                      <button 
-                      onClick={() => fetchSpecificArea(val.id) }
-                      className="w-full h-full font-semibold text-center">
+                    <li
+                      key={key}
+                      className="w-full h-full mt-5 max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]"
+                    >
+                      <button
+                        onClick={() => fetchSpecificArea(val.id)}
+                        className="w-full h-full font-semibold text-center"
+                      >
                         {val.name}
                       </button>
                     </li>
@@ -96,10 +97,10 @@ function Page() {
               </h1>
               <div className="w-full h-full object-contain">
                 <figure className="border w-full h-full">
-                  <img
+                  {/* <img
                     src={data?.image}
                     alt=""
-                  />
+                  /> */}
                 </figure>
               </div>
             </div>
