@@ -31,7 +31,6 @@ const Dashboard = () => {
   return (
     <section className="w-full h-auto min-h-screen py-5 gap-5">
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[700px] mb-5 m-auto bg-[#F9F5E6] border-2 p-3 xl:p-5 rounded-xl shadow-md flex flex-col">
-        <h1 className="font-bold pb-3 text-xl xl:text-3xl">Live Dashboard</h1>
         <Fumigation />
       </div>
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
