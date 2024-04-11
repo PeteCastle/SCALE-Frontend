@@ -43,12 +43,8 @@ const Dashboard = () => {
         <div className="w-full h-full grid gap-5 xl:grid-cols-2">
           <div className="col-span-1">
             <div className="w-full h-full border py-4 content-center">
-              <h1 className=" flex mx-auto justify-center items-center mb-4 font-semibold ">
-                Calendar Example
-              </h1>
               <Calendar
-                className="mx-auto justify-center items-center font-semibold w-12/12"
-               
+                className="mx-auto w-full border-none shadow-md lg:w-4/5 h-full lg:h-4/5 font-semibold"
                 onChange={onChange}
                 value={date}
               />
