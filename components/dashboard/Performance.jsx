@@ -16,7 +16,6 @@ const Performance = () => {
           throw new Error("Detected mosquito not found.");
         }
         const json = await response.json();
-        console.log(json.total);
         setData(json);
       } catch (err) {
         console.log(err.message);
@@ -30,34 +29,42 @@ const Performance = () => {
   return (
     <div className="xl:col-span-2 pt-5 flex flex-col gap-5">
       <h1 className="font-bold text-2xl pl-5">KPIs</h1>
-      <div className="h-full grid xl:grid-cols-2 xl:grid-rows-2 gap-5">
-        <div className="col-span-1 row-span-1 border rounded-xl shadow-md  bg-[#EBEEE8] p-5">
-          <p className="font-semibold">Average Inference Time</p>
-          <figure>
-            <img src={clock} alt="" />
-          </figure>
-          <p className="font-bold text-4xl">{data.average_inference_time}</p>
+      <div className="h-full grid grid-cols-2 xl:grid-rows-2 gap-5">
+        <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
+          <div className="flex flex-col items-center">
+            <p className="font-semibold">Average Inference Time</p>
+            <figure>
+              <img src={clock} alt="" />
+            </figure>
+            <p className="font-bold text-4xl">{data.average_inference_time}</p>
+          </div>
         </div>
         <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
-          <p className="font-semibold">Average Confidence</p>
-          <figure>
-            <img src={star} alt="" />
-          </figure>
-          <p className="font-bold text-4xl">{data.average_confidence * 100}%</p>
+          <div className="flex flex-col items-center">
+            <p className="font-semibold">Average Confidence</p>
+            <figure>
+              <img src={star} alt="" />
+            </figure>
+            <p className="font-bold text-4xl">{data.average_confidence * 100}%</p>
+          </div>
         </div>
         <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
-          <p className="font-semibold">Precision Score</p>
-          <figure>
-            <img src={target} alt="" />
-          </figure>
-          <p className="font-bold text-4xl">{data.precision_score * 100}%</p>
+          <div className="flex flex-col items-center">
+            <p className="font-semibold">Precision Score</p>
+            <figure>
+              <img src={target} alt="" />
+            </figure>
+            <p className="font-bold text-4xl">{data.precision_score * 100}%</p>
+          </div>
         </div>
         <div className="col-span-1 row-span-1 border rounded-xl shadow-md bg-[#EBEEE8] p-5">
-          <p className="font-semibold">Recall Score</p>
-          <figure>
-            <img src={bulb} alt="" />
-          </figure>
-          <p className="font-bold text-4xl">{data.recall_score * 100}%</p>
+          <div className="flex flex-col items-center">
+            <p className="font-semibold">Recall Score</p>
+            <figure>
+              <img src={bulb} alt="" />
+            </figure>
+            <p className="font-bold text-4xl">{data.recall_score * 100}%</p>
+          </div>
         </div>
       </div>
     </div>

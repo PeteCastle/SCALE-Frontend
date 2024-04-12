@@ -9,17 +9,18 @@ import WaterLevel from "./WaterLevel";
 import Performance from "./Performance";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { url } from "../../utils/contants";
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
 
   const fetchData = async (date) => {
     try {
       const formattedDate = formatDate(date);
-      const response = await fetch(`https://73135175-7b33-49a2-8e79-26b778b69ae8.mock.pstmn.io/v1/dashboard/fumigations?system=1,2,3&date=${formattedDate}`);
+      const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`);
       const data = await response.json();
       // Handle the fetched data here, e.g., update state or perform other actions
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error.message);
     }
   };
 
