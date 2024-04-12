@@ -29,7 +29,8 @@ function Page() {
         );
 
         if (!response.ok) {
-          throw new Error("Unable to fetch data");
+          const error = await response.json()
+          throw new Error(error);
         }
 
         const json = await response.json();
@@ -45,7 +46,7 @@ function Page() {
         setDefaultImg(value.image);
         setDefaultCarousel(json.results);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
@@ -58,13 +59,14 @@ function Page() {
         const response = await fetch(`${url}/v1/system/1/captures/recent`);
 
         if (!response.ok) {
-          throw new Error("Unable to fetch data");
+          const error = await response.json()
+          throw new Error(error);
         }
 
         const json = await response.json();
         setRecent(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
@@ -77,14 +79,14 @@ function Page() {
         const response = await fetch(`${url}/v1/system/details`);
 
         if (!response.ok) {
-          throw new Error("Unable to fetch data");
+          const error = await response.json()
+          throw new Error(error);
         }
 
         const json = await response.json();
         setDevices(json);
-        console.log(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
@@ -101,7 +103,8 @@ function Page() {
       );
 
       if (!response.ok) {
-        throw new Error("Unable to fetch data");
+        const error = await response.json()
+        throw new Error(error);
       }
 
       const response1 = await fetch(`${url}/v1/system/${id}/captures/recent`);
@@ -115,7 +118,7 @@ function Page() {
       const json1 = await response1.json();
       setData(json1);
     } catch (err) {
-      console.error("Unable to fetch data, server error");
+      console.error(err.message);
     }
   };
 
@@ -190,18 +193,17 @@ function Page() {
               </div>
               <div className="w-full h-full bg-[#F8F1D5] rounded ">
                 <ul className="w-11/12 h-full max-h-[425px] overflow-auto m-auto">
-                  {devices.map((val, key) => (
+                  {devices?.map((val, key) => (
                     <li
                       key={key}
                       className="w-full h-full max-h-12 my-3 border overflow-hidden rounded-full bg-[#F9F5E6]"
                     >
                       <button
                         onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
-                        className={`w-full h-full font-semibold text-center ${
-                          selectedDeviceId === val.id
-                            ? "border-2 border-blue-500 rounded-full"
-                            : ""
-                        }`}
+                        className={`w-full h-full font-semibold text-center ${selectedDeviceId === val.id
+                          ? "border-2 border-blue-500 rounded-full"
+                          : ""
+                          }`}
                       >
                         {val.name}
                       </button>
@@ -211,14 +213,14 @@ function Page() {
               </div>
             </div>
 
-            <div className="row-span-2 overflow-hidden border rounded-2xl p-4">
-              <div className="w-full h-full">
-                <h1 className=" flex font-semibold justify-start mb-12">
-                  No. of Detection count
-                </h1>
-                <p className="text-5xl font-bold">
-                  {data?.count || recent?.count}.00
-                </p>
+            <div className="row-span-2 overflow-hidden border shadow-md rounded-2xl p-4 bg-[#F8F1D5]">
+              <div className="w-full h-full relative ">
+                <div className="absolute bottom-5 right-5 ">
+                  <span className="text-8xl font-bold">{data?.count || recent?.count}</span>
+                  <div>
+                    No. of Detection count
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -243,7 +245,7 @@ function Page() {
                       </span>
                       <span className="text-gray-500 text-lg font-semibold">
                         Please select a recent captured image for
-                       <span className="text-gray-800 font-semibold"> {selectedDeviceName ? `${selectedDeviceName}` : ""}</span>
+                        <span className="text-gray-800 font-semibold"> {selectedDeviceName ? `${selectedDeviceName}` : ""}</span>
                       </span>
                     </div>
                   )}
@@ -263,32 +265,30 @@ function Page() {
               <div className="scroll-content h-auto mb-4 gap-2 w-full overflow-x-auto overflow-y-hidden px-8 scrollbarWidth scrollbarTrack scrollbarThumb scrollbarHover">
                 {/* Your images here */}
                 {capture && capture.length > 0
-                  ? capture.map((item) => (
-                      <img
-                        key={item.id}
-                        src={item.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === item.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                  ? capture?.map((val, key) => (
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(item.image)}
-                      />
-                    ))
-                  : defaultCarousel?.map((item) => (
-                      <img
-                        key={item.id}
-                        src={item.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === item.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))
+                  : defaultCarousel?.map((val, key) => (
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(item.image)}
-                      />
-                    ))}
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))}
               </div>
 
               <button
@@ -306,7 +306,7 @@ function Page() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 }

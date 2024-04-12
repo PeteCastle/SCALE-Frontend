@@ -12,10 +12,10 @@ const TotalMosquito = () => {
           `${url}/v1/dashboard/detections/count?date=2024-03`
         );
         if (!response.ok) {
-          throw new Error("Detected mosquito not found.");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
-        console.log(json.total);
         setTotalMosquito(json.total);
       } catch (err) {
         console.log(err.message);
@@ -38,12 +38,12 @@ const TotalMosquito = () => {
             .toFixed(0)
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </p>
-        <p
+        <div
           className={`absolute bottom-10 right-10 flex gap-1 items-center text-4xl text-green-800 font-semibold`}
         >
           <img src={arrowgreen} alt="" />
           <p>{`180%`}</p>
-        </p>
+        </div>
       </div>
     </>
   );

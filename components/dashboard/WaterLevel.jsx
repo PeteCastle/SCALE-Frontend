@@ -21,14 +21,14 @@ const WaterLevel = () => {
         const response = await fetch(`${url}/v1/dashboard/water_level/status`);
 
         if (!response.ok) {
-          throw new Error("Unable to fetch data");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
         const data = Object.entries(json).map(([name, Water]) => ({ name, Water }));
         setData(data);
-        console.log(data);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 

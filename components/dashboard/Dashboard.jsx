@@ -9,30 +9,39 @@ import WaterLevel from "./WaterLevel";
 import Performance from "./Performance";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { url } from "../../utils/contants";
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
 
-  const onChange = (newDate) => {
-    setDate(newDate);
-  };
-  const dataPie = [
-    { name: "Week 1", value: 7.7, color: "#6C724B" },
-    { name: "Week 2", value: 46.2, color: "#B7BE92" },
-    { name: "Week 3", value: 15.4, color: "#ECF4C3" },
-    { name: "Week 4", value: 30.8, color: "#D6E19F" },
-  ];
-
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="p-3 border rounded-xl bg-white/50 font-semibold">
-          <p>{`${payload[0].name} : ${payload[0].value.toFixed(2)}%`}</p>
-        </div>
-      );
+  const fetchData = async (date) => {
+    try {
+      const formattedDate = formatDate(date);
+      const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`);
+      const data = await response.json();
+      // Handle the fetched data here, e.g., update state or perform other actions
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
     }
-
-    return null;
   };
+
+  // Function to format the date as required by the API
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}`;
+  };
+
+  // Function to handle calendar change
+  const onChange = (date) => {
+    setDate(date);
+    fetchData(date); // Call fetchData function when the date changes
+  };
+
+  useEffect(() => {
+    // Fetch initial data when the component mounts
+    fetchData(date);
+  }, []); // Empty dependency array ensures useEffect runs only once on mount
 
   return (
     <section className="w-full h-auto min-h-screen py-5 gap-5">

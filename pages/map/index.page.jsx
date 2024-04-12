@@ -12,15 +12,15 @@ function Page() {
       const response = await fetch(`${url}/v1/coverage/${area_id}`);
 
       if (!response.ok) {
-        throw new Error("Unable to fetch data");
+        const error = await response.json()
+        throw new Error(error);
       }
 
       const json = await response.json();
       setData(json);
       setCurrectLoc(json.id);
-      console.log(json);
     } catch (err) {
-      console.error("Unable to fetch data, server error");
+      console.error(err.message);
     }
   };
 
@@ -29,13 +29,13 @@ function Page() {
       try {
         const response = await fetch(`${url}/v1/system/details`);
         if (!response.ok) {
-          throw new Error("Unable to detch Data");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
         setData(json);
-        console.log(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
@@ -47,12 +47,13 @@ function Page() {
       try {
         const response = await fetch(`${url}/v1/system/list`);
         if (!response.ok) {
-          throw new Error("Unable to detch Data");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
         setAreas(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 

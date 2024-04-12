@@ -13,35 +13,37 @@ function Page() {
       try {
         const response = await fetch(`${url}/v1/system/details`);
         if (!response.ok) {
-          throw new Error("Unable to detch Data");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
         setData(json);
-        console.log(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchArea = async () => {
-      try {
-        const response = await fetch(`${url}/v1/coverage/${currentLoc}`);
-        if (!response.ok) {
-          throw new Error("Unable to detch Data");
-        }
-        const json = await response.json();
-        setSystem(json.systems);
-        console.log(json)
-      } catch (err) {
-        console.error("Unable to fetch data, server error");
+  const fetchArea = async () => {
+    try {
+      const response = await fetch(`${url}/v1/coverage/${currentLoc}`);
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error);
       }
-    };
+      const json = await response.json();
+      setSystem(json.systems);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
-    fetchArea();
+  useEffect(() => {
+    if(currentLoc){
+      fetchArea()
+    }
   }, [currentLoc]);
 
   useEffect(() => {
@@ -49,13 +51,13 @@ function Page() {
       try {
         const response = await fetch(`${url}/v1/system/list`);
         if (!response.ok) {
-          throw new Error("Unable to detch Data");
+          const error = await response.json()
+          throw new Error(error);
         }
         const json = await response.json();
         setDevices(json);
-        console.log(json);
       } catch (err) {
-        console.error("Unable to fetch data, server error");
+        console.error(err.message);
       }
     };
 
@@ -107,9 +109,8 @@ function Page() {
                     {/* Dropdown menu */}
                     <div
                       id="dropdown"
-                      className={`${
-                        isDropdown ? "flex" : "hidden"
-                      } absolute z-10 w-full max-h-60 overflow-auto bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+                      className={`${isDropdown ? "flex" : "hidden"
+                        } absolute z-10 w-full max-h-60 overflow-auto bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
                     >
                       <ul
                         className="w-full py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -149,7 +150,8 @@ function Page() {
               <div className="w-full h-full bg-[#F8F1D5] p-2">
                 <ul className="w-11/12 h-full max-h-[175px]  xl:max-h-[525px] 2xl:max-h-[625px] overflow-auto m-auto">
                   {system?.map((val, key) => (
-                    <li className="md:w-full h-full mt-5 max-h-10 rounded-sm md:max-h-12 border overflow-hidden md:rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
+                    <li 
+                    key={key} className="md:w-full h-full mt-5 max-h-10 rounded-sm md:max-h-12 border overflow-hidden md:rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]">
                       <button
                         onClick={() => setCurrentDev(val.id)}
                         className="w-full h-full font-semibold text-center"
