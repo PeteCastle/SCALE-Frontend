@@ -12,24 +12,49 @@ import "react-calendar/dist/Calendar.css";
 import { url } from "../../utils/contants";
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
+  const [fumigationData, setFumigationData] = useState({});
 
   const fetchData = async (date) => {
     try {
       const formattedDate = formatDate(date);
-      const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`);
+      const response = await fetch(
+        `${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`
+      );
       const data = await response.json();
+      setFumigationData(data);
       // Handle the fetched data here, e.g., update state or perform other actions
     } catch (error) {
-      console.error('Error fetching data:', error.message);
+      console.error("Error fetching data:", error.message);
     }
   };
 
   // Function to format the date as required by the API
   const formatDate = (date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}`;
+  };
+
+  const tileContent = ({ date }) => {
+    const formattedDate = formatDate(date);
+    const hasData = !!fumigationData[formattedDate];
+
+    return (
+      <div className="relative">
+        {hasData && (
+          <div className="absolute  bg-blue-400 border-2 border-black top-0 left-0 w-full h-full flex justify-center items-center z-0">
+            <div className="w-5 h-5 bg-blue-400 rounded-full "></div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const tileClassName = ({ date }) => {
+    const formattedDate = formatDate(date);
+    const isActive = formattedDate === formatDate(new Date(date));
+    return isActive ? "text-black" : null;
   };
 
   // Function to handle calendar change
@@ -56,6 +81,8 @@ const Dashboard = () => {
                 className="mx-auto w-full border-none shadow-md lg:w-4/5 h-full lg:h-4/5 font-semibold"
                 onChange={onChange}
                 value={date}
+                tileContent={tileContent}
+                tileClassName={tileClassName}
               />
             </div>
           </div>
