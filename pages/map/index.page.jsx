@@ -1,4 +1,5 @@
 export { Page };
+import MapComponent from "../../components/map/Map";
 import { url } from "../../utils/contants";
 import { useEffect, useState } from "react";
 
@@ -60,6 +61,16 @@ function Page() {
     fetchArea();
   }, []);
 
+  const center = [data?.latitude || 14.5995, data?.longitude || 120.9842];
+  // Centered on Manila, Philippines
+  const zoom = 5;
+  
+  const locations = data && data.systems && data.systems.map((val, key) => ({
+    lat: val.location.latitude,
+    lng: val.location.longitude,
+    radius: val.location.radius
+  }))
+
   return (
     <>
       <section className="w-full h-full max-h-screen py-5 gap-5">
@@ -69,7 +80,8 @@ function Page() {
               <div className="max-h-10 h-full w-full bg-[#CBBF93]">
                 <div className="w-11/12 m-auto h-full flex items-center justify-between ">
                   <h1 className="font-semibold">Coverage Area</h1>
-                  <div className="w-full h-full max-w-3 max-h-3 bg-white rounded-full"></div>
+                  <div className="w-full h-full max-w-3 max-h-3 bg-white rounded-full">
+                  </div>
                 </div>
               </div>
               <div className="w-full h-full bg-[#F8F1D5]">
@@ -97,12 +109,7 @@ function Page() {
                 Barangay Coverage
               </h1>
               <div className="w-full h-full object-contain">
-                <figure className="border w-full h-full">
-                  {/* <img
-                    src={data?.image}
-                    alt=""
-                  /> */}
-                </figure>
+                <MapComponent center={center} zoom={zoom} locations={locations} />
               </div>
             </div>
             <div className="row-span-2 flex flex-col pb-5 md:pb-0">

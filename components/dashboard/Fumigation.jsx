@@ -110,10 +110,11 @@ const Fumigation = () => {
   filteredData = calculateAllData(filteredData);
 
   if (selectedDevice !== "__all__") {
-    filteredData = calculateAllData(filteredData);
+    // If a specific device is selected, always show "__all__" data in addition to the selected device
     filteredData = filteredData.map((data) => ({
       ...data,
       [selectedDevice]: providedData[data.name]?.[selectedDevice] || 0,
+      "__all__": providedData[data.name]?.["__all__"] || 0,
     }));
   }
 

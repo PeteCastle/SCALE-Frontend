@@ -54,7 +54,7 @@ const Dashboard = () => {
   const tileClassName = ({ date }) => {
     const formattedDate = formatDate(date);
     const isActive = formattedDate === formatDate(new Date(date));
-    return isActive ? 'active-date group' : null;
+    return isActive ? 'active-date group text-black' : null;
   };
 
   // Function to handle calendar change
