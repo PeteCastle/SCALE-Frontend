@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { url } from "../../utils/contants";
 const Operation = () => {
+  const [data, setData] = useState()
   const dataPie = [
     { name: "Week 1", value: 7.7, color: "#6C724B" },
     { name: "Week 2", value: 46.2, color: "#B7BE92" },
     { name: "Week 3", value: 15.4, color: "#ECF4C3" },
     { name: "Week 4", value: 30.8, color: "#D6E19F" },
   ];
+ useEffect(()=> {
+    const fetchData = async() => {
+      try {
+          const response = await fetch(`${url}/v1/dashboard/fumigations/week`)
+          if(!response.ok){
+            const error = await response.json()
+            throw new Error(error)
+          }
 
+           const json = await response.json()
+           const result = Object.entries(json).map(([week, value]) => {
+            const dataObj = {
+              week: week,
+              value: value
+            }
+            return dataObj
+           })
+           console.log(result)
+           setData(result)
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
+    fetchData()
+  }, [])
+  
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (

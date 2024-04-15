@@ -29,7 +29,7 @@ function Page() {
         );
 
         if (!response.ok) {
-          const error = await response.json()
+          const error = await response.json();
           throw new Error(error);
         }
 
@@ -59,7 +59,7 @@ function Page() {
         const response = await fetch(`${url}/v1/system/1/captures/recent`);
 
         if (!response.ok) {
-          const error = await response.json()
+          const error = await response.json();
           throw new Error(error);
         }
 
@@ -79,7 +79,7 @@ function Page() {
         const response = await fetch(`${url}/v1/system/details`);
 
         if (!response.ok) {
-          const error = await response.json()
+          const error = await response.json();
           throw new Error(error);
         }
 
@@ -103,7 +103,7 @@ function Page() {
       );
 
       if (!response.ok) {
-        const error = await response.json()
+        const error = await response.json();
         throw new Error(error);
       }
 
@@ -200,10 +200,11 @@ function Page() {
                     >
                       <button
                         onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
-                        className={`w-full h-full font-semibold text-center ${selectedDeviceId === val.id
-                          ? "border-2 border-blue-500 rounded-full"
-                          : ""
-                          }`}
+                        className={`w-full h-full font-semibold text-center ${
+                          selectedDeviceId === val.id
+                            ? "border-2 border-blue-500 rounded-full"
+                            : ""
+                        }`}
                       >
                         {val.name}
                       </button>
@@ -214,12 +215,12 @@ function Page() {
             </div>
 
             <div className="row-span-2 overflow-hidden border shadow-md rounded-2xl p-4 bg-[#F8F1D5]">
-              <div className="w-full h-full relative ">
-                <div className="absolute bottom-5 right-5 ">
-                  <span className="text-8xl font-bold">{data?.count || recent?.count}</span>
-                  <div>
-                    No. of Detection count
-                  </div>
+              <div className="w-full h-full flex items-center  justify-center">
+                <div className="flex justify-center text-center flex-col gap-2">
+                  <span className="text-8xl font-bold">
+                    {data?.count || recent?.count}
+                  </span>
+                  No. of Detection count
                 </div>
               </div>
             </div>
@@ -245,7 +246,10 @@ function Page() {
                       </span>
                       <span className="text-gray-500 text-lg font-semibold">
                         Please select a recent captured image for
-                        <span className="text-gray-800 font-semibold"> {selectedDeviceName ? `${selectedDeviceName}` : ""}</span>
+                        <span className="text-gray-800 font-semibold">
+                          {" "}
+                          {selectedDeviceName ? `${selectedDeviceName}` : ""}
+                        </span>
                       </span>
                     </div>
                   )}
@@ -266,29 +270,31 @@ function Page() {
                 {/* Your images here */}
                 {capture && capture.length > 0
                   ? capture?.map((val, key) => (
-                    <img
-                      key={key}
-                      src={val.image}
-                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
-                        ? "border-2 border-blue-500"
-                        : ""
+                      <img
+                        key={key}
+                        src={val.image}
+                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
+                          selectedImageUrl === val.image
+                            ? "border-2 border-blue-500"
+                            : ""
                         }`}
-                      alt=""
-                      onClick={() => selectImageFromCarousel(val.image)}
-                    />
-                  ))
+                        alt=""
+                        onClick={() => selectImageFromCarousel(val.image)}
+                      />
+                    ))
                   : defaultCarousel?.map((val, key) => (
-                    <img
-                      key={key}
-                      src={val.image}
-                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
-                        ? "border-2 border-blue-500"
-                        : ""
+                      <img
+                        key={key}
+                        src={val.image}
+                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
+                          selectedImageUrl === val.image
+                            ? "border-2 border-blue-500"
+                            : ""
                         }`}
-                      alt=""
-                      onClick={() => selectImageFromCarousel(val.image)}
-                    />
-                  ))}
+                        alt=""
+                        onClick={() => selectImageFromCarousel(val.image)}
+                      />
+                    ))}
               </div>
 
               <button
@@ -306,7 +312,7 @@ function Page() {
             </div>
           </div>
         </div>
-      </section >
+      </section>
     </>
   );
 }

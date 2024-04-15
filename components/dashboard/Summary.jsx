@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BarChart,
   Rectangle,
@@ -11,6 +11,11 @@ import {
 } from "recharts";
 
 const Summary = () => {
+  useEffect(() => {
+    const  fetchData = () => {
+      
+    }
+  })
   const data = [
     {
       name: "12 Hours",
