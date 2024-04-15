@@ -17,44 +17,44 @@ const Dashboard = () => {
   const fetchData = async (date) => {
     try {
       const formattedDate = formatDate(date);
-      const response = await fetch(
-        `${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`
-      );
+      const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`);
       const data = await response.json();
+      // Update fumigation data state
       setFumigationData(data);
-      // Handle the fetched data here, e.g., update state or perform other actions
     } catch (error) {
-      console.error("Error fetching data:", error.message);
+      console.error('Error fetching data:', error.message);
     }
   };
 
   // Function to format the date as required by the API
   const formatDate = (date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}`;
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
-  const tileContent = ({ date }) => {
+  // Function to render content inside calendar tiles
+  const tileContent = ({ date, view }) => {
     const formattedDate = formatDate(date);
     const hasData = !!fumigationData[formattedDate];
 
     return (
       <div className="relative">
         {hasData && (
-          <div className="absolute  bg-blue-400 border-2 border-black top-0 left-0 w-full h-full flex justify-center items-center z-0">
-            <div className="w-5 h-5 bg-blue-400 rounded-full "></div>
+          <div className="absolute -top-[8px] left-0 w-full h-full flex justify-center items-center text-black z-0">
+            <div className="w-8 h-8 bg-blue-400/20 group-active:bg-white rounded-full flex justify-center items-center"> {date.getDate()}</div>
           </div>
         )}
       </div>
     );
   };
 
+  // Function to handle click on calendar tile
   const tileClassName = ({ date }) => {
     const formattedDate = formatDate(date);
     const isActive = formattedDate === formatDate(new Date(date));
-    return isActive ? "text-black" : null;
+    return isActive ? 'active-date group' : null;
   };
 
   // Function to handle calendar change
@@ -67,6 +67,7 @@ const Dashboard = () => {
     // Fetch initial data when the component mounts
     fetchData(date);
   }, []); // Empty dependency array ensures useEffect runs only once on mount
+
 
   return (
     <section className="w-full h-auto min-h-screen py-5 gap-5">
