@@ -128,7 +128,7 @@ const Fumigation = () => {
               id="devices"
               onChange={handleDeviceChange}
               value={selectedDevice}
-              className="w-full justify-between text-black hover:border-black/30 border hover:bg-[#F9F4E3] bg-[#DDD1A0] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="w-full justify-between text-black hover:border-black/30 border-black/0 hover:bg-[#F9F4E3] bg-[#DDD1A0] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-left inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               {/* Include "__all__" option in the dropdown regardless of the selected device */}
               <option value="__all__">All</option>

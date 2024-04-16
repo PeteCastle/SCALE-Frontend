@@ -10,21 +10,16 @@ import Performance from "./Performance";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { url } from "../../utils/contants";
+import DetectedDropdown from "./DetectedDropdown";
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
+  const [data, setData] = useState({})
   const [fumigationData, setFumigationData] = useState({});
+  const [areAllSystemChecked, setAreAllSystemChecked] = useState(false);
+  const [selectedSystemOptions, setSelectedSystemOptions] = useState([]);
+  const [checkboxSystemOptions, setCheckboxSystemOptions] = useState([]);
 
-  const fetchData = async (date) => {
-    try {
-      const formattedDate = formatDate(date);
-      const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=1,2,3&date=${formattedDate}`);
-      const data = await response.json();
-      // Update fumigation data state
-      setFumigationData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error.message);
-    }
-  };
+
 
   // Function to format the date as required by the API
   const formatDate = (date) => {
@@ -60,14 +55,28 @@ const Dashboard = () => {
   // Function to handle calendar change
   const onChange = (date) => {
     setDate(date);
-    fetchData(date); // Call fetchData function when the date changes
   };
 
   useEffect(() => {
-    // Fetch initial data when the component mounts
-    fetchData(date);
-  }, []); // Empty dependency array ensures useEffect runs only once on mount
-
+    const fetchData = async () => {
+      try {
+        const formattedDate = formatDate(date) || new Date();
+        const response = await fetch(`${url}/v1/dashboard/fumigations/date?system=${selectedSystemOptions}&date=${formattedDate}`);
+        const data = await response.json();
+        setFumigationData(data);
+        const result = Object.entries(data[formattedDate]).map(([name, value]) => ({
+          name: name,
+          value: value
+        }))
+        console.log(result)
+        setData(result)
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+    fetchData();
+  }, [selectedSystemOptions, date]);
+  console.log(data)
 
   return (
     <section className="w-full h-auto min-h-screen py-5 gap-5">
@@ -76,73 +85,42 @@ const Dashboard = () => {
       </div>
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full h-full grid gap-5 xl:grid-cols-2">
-          <div className="col-span-1">
-            <div className="w-full h-full border py-4 content-center">
+          <div className="col-span-1 border">
+
+            <div className="w-11/12 m-auto h-full  py-4 content-center flex flex-col-reverse md:flex-row gap-5 items-center">
               <Calendar
-                className="mx-auto w-full border-none shadow-md lg:w-4/5 h-full lg:h-4/5 font-semibold"
+                className="mx-auto w-full border-none shadow-md  h-full lg:h-4/5 font-semibold"
                 onChange={onChange}
                 value={date}
                 tileContent={tileContent}
                 tileClassName={tileClassName}
               />
+              <div className="md:w-60 w-full h-full lg:h-4/5 flex flex-col  gap-5">
+                <div className="max-h-20 ">
+                  <DetectedDropdown
+                    areAllSystemChecked={areAllSystemChecked}
+                    setAreAllSystemChecked={setAreAllSystemChecked}
+                    selectedSystemOptions={selectedSystemOptions}
+                    setSelectedSystemOptions={setSelectedSystemOptions}
+                    checkboxSystemOptions={checkboxSystemOptions}
+                    setCheckboxSystemOptions={setCheckboxSystemOptions}
+                  />
+                </div>
+                <div className="bg-[#F9F5E6] shadow-md h-full flex items-center">
+                  <div className="w-11/12 m-auto h-full py-2 max-h-32 md:max-h-[300px] overflow-auto flex flex-col gap-2">
+                    {data && Array.isArray(data) && data.map((val, key) => (
+                      <div key={key}>
+                        <p className="text-xs"><span className="font-semibold">Name:</span> <span>{val.name}</span></p>
+                        <p className="text-xs"><span className="font-semibold">Value:</span> <span>{val.value}</span></p>
+                      </div>
+                    )) || ''}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="w-full h-full col-span-1">
-            <div className="w-full border h-full max-h-[350px] xl:max-h-none flex flex-col xl:p-5">
-              <div className="w-11/12 m-auto flex flex-wrap justify-center items-center gap-2 xl:gap-5">
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="color"
-                    value={"#6C724B"}
-                    name=""
-                    id=""
-                    className="w-6 h-6 outline-none border-black"
-                    disabled
-                  />
-                  <label htmlFor="" className="text-xs xl:text-base">
-                    Week 1
-                  </label>
-                </div>
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="color"
-                    value={"#B7BE92"}
-                    name=""
-                    id=""
-                    className="w-6 h-6 outline-none border-black"
-                    disabled
-                  />
-                  <label htmlFor="" className="text-xs xl:text-base">
-                    Week 2
-                  </label>
-                </div>
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="color"
-                    value={"#ECF4C3"}
-                    name=""
-                    id=""
-                    className="w-6 h-6 outline-none border-black"
-                    disabled
-                  />
-                  <label htmlFor="" className="text-xs xl:text-base">
-                    Week 3
-                  </label>
-                </div>
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="color"
-                    value={"#D6E19F"}
-                    name=""
-                    id=""
-                    className="w-6 h-6 outline-none border-black"
-                    disabled
-                  />
-                  <label htmlFor="" className="text-xs xl:text-base">
-                    Week 4
-                  </label>
-                </div>
-              </div>
+            <div className="w-full  h-full max-h-[350px] xl:max-h-none flex flex-col xl:p-5">
               <Operation />
             </div>
           </div>
