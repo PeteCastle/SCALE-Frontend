@@ -14,10 +14,10 @@ const TitleSection = () => {
             Region-Based Convolutional Neural Networks
           </h1>
           <p className="text-md md:text-2xl text-gray-600 mb-8">
-            Smart Control Anti-mosquito Locator and Eliminator
+            Smart Control Anti-Mosquito Locator and Eliminator
           </p>
         </div>
-        <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+        <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 xl:grid-cols-4 gap-8 ">
           <div className="bg-[#D9E3A7] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
             <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-42">
               <img
@@ -31,8 +31,7 @@ const TitleSection = () => {
                 Live Dashboard
               </p>
               <p className="text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consectetur, libero.
+              Dynamic and interactive interface that provides real-time insights of mosquito detection, fumigation liquid levels, and system uptime.
               </p>
             </div>
           </div>
@@ -49,8 +48,8 @@ const TitleSection = () => {
                 Recent Captured
               </p>
               <p className="text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consectetur, libero.
+              Gallery of images captured by a chosen device, providing details (date, time, and location) with the number of mosquito detections recorded in each device.
+
               </p>
             </div>
           </div>
@@ -67,8 +66,7 @@ const TitleSection = () => {
                 Active System
               </p>
               <p className="text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consectetur, libero.
+              Visual representation of deployed devices at specific locations, accompanied by their status. Assists users in checking the status of devices in a certain location.
               </p>
             </div>
           </div>
@@ -85,8 +83,7 @@ const TitleSection = () => {
                 Map Coverage
               </p>
               <p className="text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consectetur, libero.
+              Detailed view of the barangay area, including its streets and key locations, allowing users to visualize the extent of coverage.
               </p>
             </div>
           </div>

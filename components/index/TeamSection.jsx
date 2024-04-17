@@ -103,7 +103,7 @@ const SecondSection = () => {
               <a href="#!">
                 <img
                   className="rounded-t-lg lg:h-[280px] md:h-[380px] flex justify-center items-center mx-auto w-full h-auto object-cover"
-                  src="/dev/paclian.jpg"
+                  src="/dev/josh.jpg"
                   alt=""
                 />
               </a>
@@ -137,7 +137,7 @@ const SecondSection = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="https://github.com/marcalou"
                         target="_blank"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
@@ -146,7 +146,7 @@ const SecondSection = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="https://www.linkedin.com/in/jmdmarquez/"
                         target="_blank"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
@@ -195,7 +195,7 @@ const SecondSection = () => {
                     <li>
                       <a
                        target="_blank"
-                        href="#"
+                        href="https://github.com/IcedTeaLemon"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
                         <FaGithub/>
@@ -204,7 +204,8 @@ const SecondSection = () => {
                     <li>
                       <a
                        target="_blank"
-                        href="#"
+                        href="https://www.linkedin.com/in/miraizaelisamerculio?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+                        "
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
                         <FaLinkedin/>
@@ -253,7 +254,7 @@ const SecondSection = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="https://github.com/Silverwingzzz"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
                         <FaGithub/>
@@ -261,7 +262,7 @@ const SecondSection = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="https://www.linkedin.com/in/micha-lene-paclian-643801252/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                       >
                         <FaLinkedin/>
@@ -275,7 +276,7 @@ const SecondSection = () => {
               <a href="#!">
                 <img
                   className="rounded-t-lg lg:h-[280px] md:h-[380px] flex justify-center items-center mx-auto w-full h-auto object-cover"
-                  src="/dev/paclian.jpg"
+                  src="/dev/helen.jpg"
                   alt=""
                 />
               </a>
@@ -308,24 +309,8 @@ const SecondSection = () => {
                         <FaFacebook/>
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        target="_blank"
-                        className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
-                      >
-                        <FaGithub/>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        target="_blank"
-                        className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
-                      >
-                        <FaLinkedin/>
-                      </a>
-                    </li>
+                   
+                  
                   </ul>
                 </div>
               </div>
