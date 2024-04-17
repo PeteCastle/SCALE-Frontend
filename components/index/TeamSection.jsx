@@ -14,8 +14,7 @@ const SecondSection = () => {
               Our Team
             </h2>
             <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
-              Explore the whole collection of open-source web components and
-              elements built with the utility classes from Tailwind
+            Meet the talented individuals behind our innovative research and development efforts. With expertise in various disciplines, the team brings a unique blend of skills and perspectives to tackle challenges and drive impactful solutions.
             </p>
           </div>
 

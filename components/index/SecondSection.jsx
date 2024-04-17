@@ -6,8 +6,8 @@ import map from "/map.svg";
 const SecondSection = () => {
   return (
     <>
-      <section className="py-10 w-full h-100 lg:h-screen flex flex-col justify-center items-center gap-12 bg-[#F9F5E6]">
-        <div className="flex lg:flex-row md:flex-col-reverse flex-col-reverse w-full px-12 gap-8">
+      <section className="py-10 w-full h-100 xl:h-screen lg:h-auto flex flex-col justify-center items-center gap-12 bg-[#F9F5E6]">
+        <div className="flex xl:flex-row lg:flex-col-reverse md:flex-col-reverse flex-col-reverse w-full px-12 gap-8">
           <div className="w-full h-auto  flex ">
             <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 p-4  mx-auto gap-12">
               <div className="flex-col flex justify-start lg:mt-[4rem] mt-0">

@@ -7,7 +7,7 @@ import map from "/map.svg";
 const TitleSection = () => {
   return (
     <>
-      <section className="py-10 xxl:py-0 w-full h-100 lg:h-screen flex flex-col justify-center items-center gap-12">
+      <section className="py-10 xxl:py-0 w-full h-100 xl:h-screen lg:h-auto flex flex-col justify-center items-center gap-12">
         <div className="text-center px-4 lg:px-12">
           <h1 className="text-2xl lg:text-5xl font-bold text-gray-800 mb-4 text-wrap">
             Integrated Mosquito Detection and Fumigation System Utilizing Faster
