@@ -35,23 +35,23 @@ const SecondSection = () => {
                   </h3>
                   <div className=" gap-2 space-y-2 space-x-1 ">
                     <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
-                      Project Lead
+                      Project Manager
                     </span>
                     <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
-                      Backend AI
+                      Backend Dev
                     </span>
                     <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
-                      Cloud
+                      Cloud Dev
                     </span>
-
+                    <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
+                      AI Dev
+                    </span>
                     <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
                       Arduino Dev
                     </span>
                   </div>
                   <p className="mt-3 mb-4 text-xs font-primary  text-gray-500  ">
-                    I am dedicated to continuous learning and innovation. I
-                    strive to make a meaningful impact in my life and embrace
-                    opportunities for personal growth.
+                   I aim to engineer data by actively leveraging it to drive impactful solutions through data-driven insights.
                   </p>
                   <ul className="flex space-x-4 sm:mt-0">
                     <li>
