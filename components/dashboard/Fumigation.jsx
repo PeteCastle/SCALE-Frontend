@@ -27,7 +27,8 @@ const Fumigation = () => {
       try {
         const selected = selectedSystemOptions || "1,2,3";
         const response = await fetch(
-          `https://393e0ce7-669e-4853-ae1c-5079651247aa.mock.pstmn.io/v1/dashboard/detections/history?system=${selected}&limit=25`
+          // `https://393e0ce7-669e-4853-ae1c-5079651247aa.mock.pstmn.io/v1/dashboard/detections/history?system=${selected}&limit=25`
+          `${url}/v1/dashboard/detections/history?system=${selected}&limit=25`
         );
 
         if (!response.ok) {
@@ -120,9 +121,9 @@ const Fumigation = () => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col md:flex-row">
         <h1 className="font-bold pb-3 text-xl xl:text-3xl">Live Dashboard</h1>
-        <div className="flex items-center gap-5 max-w-[400px]">
+        <div className="flex items-center mb-5 gap-5 md:max-w-[400px]">
           <div className="w-full">
             <select
               id="devices"

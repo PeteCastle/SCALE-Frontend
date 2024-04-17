@@ -85,7 +85,7 @@ const Dashboard = () => {
       </div>
       <div className="w-11/12 xl:w-11/12 h-2/5 xl:h-[500px] mb-5 m-auto">
         <div className="w-full h-full grid gap-5 xl:grid-cols-2">
-          <div className="col-span-1 border">
+          <div className="col-span-1 border rounded-md">
 
             <div className="w-11/12 m-auto h-full  py-4 content-center flex flex-col-reverse md:flex-row gap-5 items-center">
               <Calendar
@@ -107,11 +107,12 @@ const Dashboard = () => {
                   />
                 </div>
                 <div className="bg-[#F9F5E6] shadow-md h-full flex items-center">
-                  <div className="w-11/12 m-auto h-full py-2 max-h-32 md:max-h-[300px] overflow-auto flex flex-col gap-2">
+                  <div className="w-11/12 m-auto h-full py-2 max-h-44 md:max-h-[300px] overflow-auto flex flex-col gap-2">
+                    <span className="font-bold">Details</span>
                     {data && Array.isArray(data) && data.map((val, key) => (
                       <div key={key}>
-                        <p className="text-xs"><span className="font-semibold">Name:</span> <span>{val.name}</span></p>
-                        <p className="text-xs"><span className="font-semibold">Value:</span> <span>{val.value}</span></p>
+                        <p className="text-sm"><span className="font-semibold">Name:</span> <span>{val.name}</span></p>
+                        <p className="text-sm"><span className="font-semibold">Value:</span> <span>{val.value}</span></p>
                       </div>
                     )) || ''}
                   </div>
@@ -120,7 +121,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-full h-full col-span-1">
-            <div className="w-full  h-full max-h-[350px] xl:max-h-none flex flex-col xl:p-5">
+            <div className="w-full border rounded-md h-full max-h-[350px] xl:max-h-none flex flex-col xl:p-5">
               <Operation />
             </div>
           </div>
