@@ -57,9 +57,8 @@ const SecondSection = () => {
             </div>
           </div>
           <div className="w-full h-auto lg:h-screen content-center">
-            <div className="flex mx-auto  items-center">
-            <img src="/logo/model.png" className="flex mx-auto "/>
-
+            <div className="size-full max-w-[400px] flex mx-auto  items-center">
+              <img src="/device.svg" className="size-full flex  object-contain mx-auto " />
             </div>
           </div>
         </div>
