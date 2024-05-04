@@ -46,13 +46,14 @@ function Page() {
   useEffect(() => {
     const fetchArea = async () => {
       try {
-        const response = await fetch(`${url}/v1/system/list`);
+        const response = await fetch(`${url}/v1/coverage/list`);
         if (!response.ok) {
           const error = await response.json()
           throw new Error(error);
         }
         const json = await response.json();
         setAreas(json);
+        console.log(json)
       } catch (err) {
         console.error(err.message);
       }
@@ -63,7 +64,7 @@ function Page() {
 
   const center = [data?.latitude || 14.5995, data?.longitude || 120.9842];
   // Centered on Manila, Philippines
-  const zoom = 5;
+  const zoom = 40;
   
   const locations = data && data.systems && data.systems.map((val, key) => ({
     lat: val.location.latitude,
@@ -89,13 +90,13 @@ function Page() {
                   {areas.map((val, key) => (
                     <li
                       key={key}
-                      className="w-full h-full mt-5 max-h-12 border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]"
+                      className="w-full h-auto mt-5 max-h-fit border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]"
                     >
                       <button
                         onClick={() => fetchSpecificArea(val.id)}
-                        className="w-full h-full font-semibold text-center"
+                        className="p-2 w-full h-full font-semibold text-center"
                       >
-                        {val.name}
+                        {val.area_name}
                       </button>
                     </li>
                   ))}
