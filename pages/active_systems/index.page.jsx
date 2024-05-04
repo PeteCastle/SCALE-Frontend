@@ -11,7 +11,7 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/v1/system/details`);
+        const response = await fetch(`${url}/v1/coverage/list`);
         if (!response.ok) {
           const error = await response.json()
           throw new Error(error);
@@ -122,7 +122,7 @@ function Page() {
                               onClick={() => handleDropdown(val.id)}
                               className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
-                              {val.location.name}
+                              {val.area_name}
                             </button>
                           </li>
                         ))}

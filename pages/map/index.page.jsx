@@ -46,7 +46,7 @@ function Page() {
   useEffect(() => {
     const fetchArea = async () => {
       try {
-        const response = await fetch(`${url}/v1/coverage/list`);
+        const response = await fetch(`${url}/v1/system/list`);
         if (!response.ok) {
           const error = await response.json()
           throw new Error(error);
@@ -87,7 +87,7 @@ function Page() {
               </div>
               <div className="w-full h-full bg-[#F8F1D5]">
                 <ul className="w-11/12 h-full max-h-[175px]  xl:max-h-[675px] 2xl:max-h-[800px] overflow-auto m-auto">
-                  {areas.map((val, key) => (
+                  {areas?.map((val, key) => (
                     <li
                       key={key}
                       className="w-full h-auto mt-5 max-h-fit border overflow-hidden rounded-full hover:border-black/30 bg-[#F9F4E3] hover:bg-[#DDD1A0]"
@@ -96,7 +96,7 @@ function Page() {
                         onClick={() => fetchSpecificArea(val.id)}
                         className="p-2 w-full h-full font-semibold text-center"
                       >
-                        {val.area_name}
+                        {val?.name}
                       </button>
                     </li>
                   ))}
