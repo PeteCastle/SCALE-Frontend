@@ -32,7 +32,7 @@ const MapComponent = ({ center, zoom, locations }) => {
           color: 'lightblue',
           fillColor: 'lightgreen',
           fillOpacity: 0.3,
-          radius: location.radius // in meters
+          radius: 100 // in meters
         }).addTo(mapInstance.current);
       });
     };
