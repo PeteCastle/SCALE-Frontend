@@ -46,7 +46,7 @@ function Page() {
   useEffect(() => {
     const fetchArea = async () => {
       try {
-        const response = await fetch(`${url}/v1/system/list`);
+        const response = await fetch(`${url}/v1/coverage/list`);
         if (!response.ok) {
           const error = await response.json()
           throw new Error(error);
@@ -96,7 +96,7 @@ function Page() {
                         onClick={() => fetchSpecificArea(val.id)}
                         className="p-2 w-full h-full font-semibold text-center"
                       >
-                        {val?.name}
+                        {val?.area_name}
                       </button>
                     </li>
                   ))}
