@@ -17,7 +17,7 @@ const TitleSection = () => {
             Smart Control Anti-Mosquito Locator and Eliminator
           </p>
         </div>
-        <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 xl:grid-cols-4 gap-8 ">
+        <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 ">
           <div className="bg-[#D9E3A7] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
             <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-42">
               <img
