@@ -38,42 +38,44 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-full col-span-2  flex flex-col gap-2 justify-center items-center ">
-        <div className="w-11/12 h-full md:h-[80%] border-y border-black py-5 lg:border-x lg:border-y-0 m-auto flex flex-col gap-5 justify-center items-center">
+        <div className="w-11/12 h-full md:h-[80%] my-5 border-y border-black py-5 lg:border-x lg:border-y-0 m-auto flex flex-col gap-5 justify-center items-center">
           <h1 className="font-primary font-semibold">Website Navigation</h1>
-          <ul className="flex flex-col gap-4">
-            <li>
-              <a href="/dashboard" className="flex gap-2">
-                <figure>
-                  <img src={liveic} alt="" />
-                </figure>
-                <span className="font-primary text-sm">Live Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="/recent_captured" className="flex gap-2">
-                <figure>
-                  <img src={rcIcon} alt="" />
-                </figure>
-                <span className="font-primary text-sm">Recent Captured</span>
-              </a>
-            </li>
-            <li>
-              <a href="/active_systems" className="flex gap-2">
-                <figure>
-                  <img src={locationic} alt="" />
-                </figure>
-                <span className="font-primary text-sm">Active Systems</span>
-              </a>
-            </li>
-            <li>
-              <a href="/map" className="flex gap-2">
-                <figure>
-                  <img src={mapic} alt="" />
-                </figure>
-                <span className="font-primary text-sm">Map Coverage</span>
-              </a>
-            </li>
-          </ul>
+          <div className="w-full flex justify-center">
+            <ul className="w-fit grid grid-cols-2 lg:flex lg:flex-col flex-wrap gap lg:gap-4">
+              <li>
+                <a href="/dashboard" className="flex gap-2">
+                  <figure>
+                    <img src={liveic} alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Live Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="/recent_captured" className="flex gap-2">
+                  <figure>
+                    <img src={rcIcon} alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Recent Captured</span>
+                </a>
+              </li>
+              <li>
+                <a href="/active_systems" className="flex gap-2">
+                  <figure>
+                    <img src={locationic} alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Active Systems</span>
+                </a>
+              </li>
+              <li>
+                <a href="/map" className="flex gap-2">
+                  <figure>
+                    <img src={mapic} alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Map Coverage</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="col-span-3 size-full flex justify-center items-center ">
@@ -82,7 +84,7 @@ const Footer = () => {
             The entire project is open-source:
           </h1>
           <div className="flex justify-center lg:justify-start">
-            <ul className="flex flex-wrap  gap-5 max-w-[300px]">
+            <ul className="flex flex-wrap gap-5 max-w-[300px]">
               <li>
                 <a href="https://github.com/PeteCastle/SCALE-Frontend" target="_blank" className="flex items-center gap-2">
                   <figure className="size-full max-w-5">
@@ -119,8 +121,8 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="font-primary text-md font-semibold text-center lg:text-start">Others:</div>
-          <div className="w-3/5 m-auto lg:w-auto lg:m-0">
+          <div className="font-primary text-md font-semibold m-auto w-4/5 lg:m-0 ">Others:</div>
+          <div className="w-4/5 m-auto lg:m-0 ">
             <ul className="">
               <li>
                 <a href="" className="flex items-center gap-2">
