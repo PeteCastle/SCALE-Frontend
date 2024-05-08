@@ -21,7 +21,7 @@ const TitleSection = () => {
             </p>
           </div>
           <div className="lg:px-[100px] px-8 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 ">
-            <div className="bg-[#D9E3A7] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            <a href="/dashboard" className="bg-[#D9E3A7] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
               <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-42">
                 <img
                   src={dashboard}
@@ -37,8 +37,8 @@ const TitleSection = () => {
                   Dynamic and interactive interface that provides real-time insights of mosquito detection, fumigation liquid levels, and system uptime.
                 </p>
               </div>
-            </div>
-            <div className="bg-[#F8FEDD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            </a>
+            <a href="/recent_captured" className="bg-[#F8FEDD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
               <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
                 <img
                   src={target}
@@ -55,8 +55,8 @@ const TitleSection = () => {
 
                 </p>
               </div>
-            </div>
-            <div className="bg-[#ECF4C6] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            </a>
+            <a href="/active_systems" className="bg-[#ECF4C6] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
               <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
                 <img
                   src={location}
@@ -72,8 +72,8 @@ const TitleSection = () => {
                   Visual representation of deployed devices at specific locations, accompanied by their status. Assists users in checking the status of devices in a certain location.
                 </p>
               </div>
-            </div>
-            <div className="bg-[#E2E7CD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
+            </a>
+            <a href="/map" className="bg-[#E2E7CD] rounded-xl shadow-md lg:p-8 p-4 transition-transform duration-500 ease-in-out transform hover:scale-105 lg:mb-0 mb-8">
               <div className="flex items-center xxl:-mt-[80px] md:-mt-[70px] -mt-[60px] mb-2">
                 <img
                   src={map}
@@ -89,7 +89,7 @@ const TitleSection = () => {
                   Detailed view of the barangay area, including its streets and key locations, allowing users to visualize the extent of coverage.
                 </p>
               </div>
-            </div>
+            </a>
           </div>
         </div>
         <div className="row-span-1 w-full md:w-4/5 m-auto h-fit md:h-full flex flex-col grid xl:grid-cols-2 gap-5">

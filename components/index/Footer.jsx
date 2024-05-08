@@ -84,7 +84,7 @@ const Footer = () => {
           <div className="flex justify-center lg:justify-start">
             <ul className="flex flex-wrap  gap-5 max-w-[300px]">
               <li>
-                <a href="" className="flex items-center gap-2">
+                <a href="https://github.com/PeteCastle/SCALE-Frontend" target="_blank" className="flex items-center gap-2">
                   <figure className="size-full max-w-5">
                     <img src={fe} className="size-full" alt="" />
                   </figure>
@@ -92,7 +92,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="" className="flex items-center gap-2">
+                <a href="https://github.com/PeteCastle/SCALE-Model" target="_blank" className="flex items-center gap-2">
                   <figure className="size-full max-w-5">
                     <img src={ai} className="size-full" alt="" />
                   </figure>
@@ -102,7 +102,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="" className="flex items-center gap-2">
+                <a href="https://github.com/PeteCastle/SCALE-Backend" target="_blank" className="flex items-center gap-2">
                   <figure className="size-full max-w-5">
                     <img src={be} className="size-full" alt="" />
                   </figure>
@@ -110,7 +110,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="" className="flex items-center gap-2">
+                <a href="https://github.com/PeteCastle/SCALE-Arduino" target="_blank" className="flex items-center gap-2">
                   <figure className="size-full max-w-5">
                     <img src={arduino} className="size-full" alt="" />
                   </figure>
