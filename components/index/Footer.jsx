@@ -13,7 +13,7 @@ import journal from "/journal.svg";
 
 const Footer = () => {
   return (
-    <div className="size-full bg-[#FDF884] max-h-auto lg:max-h-80 grid grid-cols-1 lg:grid-cols-9">
+    <div className="size-full bg-[#FDF884] h-auto max-h-auto py-5 lg:py-0 md:h-full lg:max-h-80 grid grid-cols-1 lg:grid-cols-9">
       <div className="col-span-4 w-4/5 m-auto">
         <div className="size-full flex lg:block justify-center mb-5 lg:mb-0">
           <figure className="size-full max-w-60 ">
@@ -81,61 +81,65 @@ const Footer = () => {
           <h1 className="font-primary font-semibold text-center md:text-start">
             The entire project is open-source:
           </h1>
-          <ul className="flex flex-wrap  gap-5 max-w-[300px]">
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure className="size-full max-w-5">
-                  <img src={fe} className="size-full" alt="" />
-                </figure>
-                <span className="font-primary text-sm">Frontend</span>
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure className="size-full max-w-5">
-                  <img src={ai} className="size-full" alt="" />
-                </figure>
-                <span className="font-primary text-sm">
-                  Artifical Intelligence
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure className="size-full max-w-5">
-                  <img src={be} className="size-full" alt="" />
-                </figure>
-                <span className="font-primary text-sm">Backend</span>
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure className="size-full max-w-5">
-                  <img src={arduino} className="size-full" alt="" />
-                </figure>
-                <span className="font-primary text-sm">Arduino</span>
-              </a>
-            </li>
-          </ul>
-          <div className="font-primary text-md font-semibold">Others:</div>
-          <ul className="">
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure>
-                  <img src={info} alt="" />
-                </figure>
-                <span className="italic font-primary text-sm hover:underline">See our official infographics</span>
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <figure>
-                  <img src={journal} alt="" />
-                </figure>
-                <span className="italic font-primary text-sm hover:underline">See the journal paper</span>
-              </a>
-            </li>
-          </ul>
+          <div className="flex justify-center lg:justify-start">
+            <ul className="flex flex-wrap  gap-5 max-w-[300px]">
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure className="size-full max-w-5">
+                    <img src={fe} className="size-full" alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Frontend</span>
+                </a>
+              </li>
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure className="size-full max-w-5">
+                    <img src={ai} className="size-full" alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">
+                    Artifical Intelligence
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure className="size-full max-w-5">
+                    <img src={be} className="size-full" alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Backend</span>
+                </a>
+              </li>
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure className="size-full max-w-5">
+                    <img src={arduino} className="size-full" alt="" />
+                  </figure>
+                  <span className="font-primary text-sm">Arduino</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="font-primary text-md font-semibold text-center lg:text-start">Others:</div>
+          <div className="w-3/5 m-auto lg:w-auto lg:m-0">
+            <ul className="">
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure>
+                    <img src={info} alt="" />
+                  </figure>
+                  <span className="italic font-primary text-sm hover:underline">See our official infographics</span>
+                </a>
+              </li>
+              <li>
+                <a href="" className="flex items-center gap-2">
+                  <figure>
+                    <img src={journal} alt="" />
+                  </figure>
+                  <span className="italic font-primary text-sm hover:underline">See the journal paper</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
