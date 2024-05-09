@@ -3,9 +3,9 @@ import YoutubeEmbed from "./YoutubeEmbed";
 const YoutubeSection = () => {
     return (
         <>
-            <section className="py-10 xl:py-0 w-full h-full md:h-auto xl:h-full bg-red-200 lg:h-auto flex">
-                <div className="row-span-1 w-full md:w-4/5 m-auto h-fit md:h-full flex flex-col xl:grid xl:grid-cols-2 gap-5">
-                    <div className="col-span-1 flex items-center justify-center m-auto h-[250px] md:h-4/5 w-4/5">
+            <section className="py-10 xl:py-0 w-full h-auto md:h-auto xl:h-full bg-[#F9F5E6]/50 xl:max-h-[400px] lg:h-auto flex">
+                <div className="row-span-1 w-full md:w-4/5 m-auto h-fit md:h-full flex flex-col lg:grid lg:grid-cols-2 gap-5">
+                    <div className="col-span-1 flex items-center justify-center m-auto h-[250px] lg:max-h-[500px] lg:w-full xl:max-h-[400px] xl:h-4/5 w-4/5">
                         <YoutubeEmbed />
                     </div>
                     <div className="col-span-1 flex items-center justify-center">

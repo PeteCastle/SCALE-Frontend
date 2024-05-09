@@ -8,10 +8,10 @@ import map from "/map.svg";
 const TitleSection = () => {
   return (
     <>
-      <section className="py-10 xl:py-0 w-full h-100 md:h-auto xl:h-screen lg:h-auto flex flex-col md:grid grid-rows-2 gap-5">
-        <div className="row-span-1">
+      <section className="py-10 xl:py-0 w-full h-100 md:h-auto xl:h-screen lg:h-auto flex flex-col items-center justify-center  gap-5">
+        <div className="">
           <div className="text-center px-4 lg:px-12">
-            <h1 className="mt-10 text-2xl lg:text-3xl max-w-screen-xl m-auto font-bold text-gray-800 mb-4 text-wrap">
+            <h1 className="mt-10 text-2xl lg:text-4xl max-w-screen-xl m-auto font-bold text-gray-800 mb-4 text-wrap">
               Integrated Mosquito Detection and Fumigation System Utilizing Faster
               Region-Based Convolutional Neural Networks
             </h1>
