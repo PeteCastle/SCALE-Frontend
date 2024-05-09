@@ -21,37 +21,41 @@ function Page() {
   const [selectedDeviceName, setSelectedDeviceName] = useState(null);
   const [showPlaceholder, setShowPlaceholder] = useState(false); // State to control placeholder visibility
 
-  useEffect(() => {
-    const fetchOne = async () => {
-      try {
-        const response = await fetch(
-          `${url}/v1/system/1/captures/history?page_size=2&page=2`
-        );
+  // useEffect(() => {
+  //   const fetchOne = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${url}/v1/system/1/captures/history?page_size=2&page=2`
+  //       );
 
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error);
-        }
+  //       if (!response.ok) {
+  //         const error = await response.json();
+  //         throw new Error(error);
+  //       }
 
-        const json = await response.json();
+  //       const json = await response.json();
 
-        const value = json.results?.reduce(
-          (prev, current) => {
-            const prevTime = new Date(prev.time);
-            const currentTime = new Date(current.time);
-            return prevTime > currentTime ? prev : current;
-          },
-          [0]
-        );
-        setDefaultImg(value.image);
-        setDefaultCarousel(json.results);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
+  //       const value = json.results?.reduce(
+  //         (prev, current) => {
+  //           const prevTime = new Date(prev.time);
+  //           const currentTime = new Date(current.time);
+  //           return prevTime > currentTime ? prev : current;
+  //         },
+  //         [0]
+  //       );
+  //       setDefaultImg(value.image);
+  //       setDefaultCarousel(json.results);
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //   };
 
-    fetchOne();
-  }, []);
+  //   fetchOne();
+  //   const intervalId = setInterval(fetchOne, 10000);
+
+  //   // Clear interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   useEffect(() => {
     const fetchRecent = async () => {
@@ -95,6 +99,7 @@ function Page() {
 
   const fetchOne = async (id, name) => {
     try {
+      console.log(id)
       setSelectedDeviceId(id);
       setSelectedDeviceName(name); // Set the selected device name
       setShowPlaceholder(true); // Display placeholder text when a device is selected
@@ -200,11 +205,10 @@ function Page() {
                     >
                       <button
                         onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
-                        className={`w-full h-full font-semibold text-center ${
-                          selectedDeviceId === val.id
+                        className={`w-full h-full font-semibold text-center ${selectedDeviceId === val.id
                             ? "border-2 border-blue-500 rounded-full"
                             : ""
-                        }`}
+                          }`}
                       >
                         {val.name}
                       </button>
@@ -229,7 +233,7 @@ function Page() {
           <div className="col-span-4 grid grid-cols-1 grid-rows-6 gap-5">
             <div className="row-span-6 col-span-1 flex flex-col ">
               <h1 className="font-semibold w-fit text-2xl px-5 py-2 bg-[#CBBF93] rounded-t">
-                Device Picture
+                Captured Photo
               </h1>
               <div className="w-full h-[600px] mb-2 object-contain flex justify-center items-center">
                 <figure className="w-full h-full">
@@ -270,31 +274,29 @@ function Page() {
                 {/* Your images here */}
                 {capture && capture.length > 0
                   ? capture?.map((val, key) => (
-                      <img
-                        key={key}
-                        src={val.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === val.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                          ? "border-2 border-blue-500"
+                          : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(val.image)}
-                      />
-                    ))
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))
                   : defaultCarousel?.map((val, key) => (
-                      <img
-                        key={key}
-                        src={val.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === val.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                          ? "border-2 border-blue-500"
+                          : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(val.image)}
-                      />
-                    ))}
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))}
               </div>
 
               <button

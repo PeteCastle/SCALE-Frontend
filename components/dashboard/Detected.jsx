@@ -39,7 +39,7 @@ const Detected = () => {
           date: date,
           value: value,
         }));
-
+        console.log(result)
         setData(result);
       } catch (err) {
         console.log(err.message);
