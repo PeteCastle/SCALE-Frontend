@@ -6,7 +6,7 @@ import {
 } from "react-icons/io";
 import { url } from "../../utils/contants";
 import { GrSelect } from "react-icons/gr";
-
+import angle from '/arrow.svg'
 function Page() {
   const [defaultCarousel, setDefaultCarousel] = useState();
   const [defaultImg, setDefaultImg] = useState();
@@ -145,14 +145,14 @@ function Page() {
 
   const scrollByAmount = 200; // Adjust scroll amount as needed
 
-  const mostRecent = capture?.reduce(
-    (prev, current) => {
-      const prevTime = new Date(prev.time);
-      const currentTime = new Date(current.time);
-      return prevTime > currentTime ? prev : current;
-    },
-    [0]
-  );
+  // const mostRecent = capture?.reduce(
+  //   (prev, current) => {
+  //     const prevTime = new Date(prev.time);
+  //     const currentTime = new Date(current.time);
+  //     return prevTime > currentTime ? prev : current;
+  //   },
+  //   [0]
+  // );
 
   const scrollPrevHandler = () => {
     const scrollContent = document.querySelector(".scroll-content");
@@ -169,11 +169,26 @@ function Page() {
       behavior: "smooth",
     });
   };
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // const selectImageFromCarousel = (imageUrl) => {
+  //   setSelectedImageUrl(imageUrl);
+  // };
   const selectImageFromCarousel = (imageUrl) => {
+    const newIndex = capture.findIndex((val) => val.image === imageUrl);
+    setCurrentIndex(newIndex);
     setSelectedImageUrl(imageUrl);
   };
+  const moveToNextImage = () => {
+    const nextIndex = (currentIndex + 1) % capture.length;
+    setCurrentIndex(nextIndex);
+    setSelectedImageUrl(capture[nextIndex].image);
+  };
 
+  const moveToPreviousImage = () => {
+    const previousIndex = (currentIndex - 1 + capture.length) % capture.length;
+    setCurrentIndex(previousIndex);
+    setSelectedImageUrl(capture[previousIndex].image);
+  };
   const dateToPrint = selectedCapture
     ? new Date(selectedCapture.time).toDateString()
     : new Date(recent?.time).toDateString();
@@ -206,8 +221,8 @@ function Page() {
                       <button
                         onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
                         className={`w-full h-full font-semibold text-center ${selectedDeviceId === val.id
-                            ? "border-2 border-blue-500 rounded-full"
-                            : ""
+                          ? "border-2 border-blue-500 rounded-full"
+                          : ""
                           }`}
                       >
                         {val.name}
@@ -235,7 +250,15 @@ function Page() {
               <h1 className="font-semibold w-fit text-2xl px-5 py-2 bg-[#CBBF93] rounded-t">
                 Captured Photo
               </h1>
-              <div className="w-full h-[600px] mb-2 object-contain flex justify-center items-center">
+              <div className="relative w-full h-[600px] mb-2 object-contain flex justify-center items-center">
+                <button className="absolute left-5  rotate-180" onClick={moveToPreviousImage}>
+                  <figure className="size-full max-w-10">
+                    <img className="size-full" src={angle} alt="" />
+                  </figure>
+                </button>
+                <button className="absolute right-5" onClick={moveToNextImage}><figure className="size-full max-w-10">
+                  <img className="size-full" src={angle} alt="" />
+                </figure></button>
                 <figure className="w-full h-full">
                   {selectedImageUrl ? (
                     <img
@@ -243,6 +266,7 @@ function Page() {
                       className="w-full h-[600px] object-fit fade-in"
                       alt={data?.name}
                     />
+
                   ) : (
                     <div className="w-full h-[600px] bg-gray-200 flex justify-center content-center mx-auto items-center">
                       <span className="text-gray-500">
@@ -278,8 +302,8 @@ function Page() {
                       key={key}
                       src={val.image}
                       className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
-                          ? "border-2 border-blue-500"
-                          : ""
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
                       alt=""
                       onClick={() => selectImageFromCarousel(val.image)}
@@ -290,8 +314,8 @@ function Page() {
                       key={key}
                       src={val.image}
                       className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
-                          ? "border-2 border-blue-500"
-                          : ""
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
                       alt=""
                       onClick={() => selectImageFromCarousel(val.image)}
