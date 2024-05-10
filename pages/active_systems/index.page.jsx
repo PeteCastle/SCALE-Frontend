@@ -1,5 +1,6 @@
 export { Page };
 import { useEffect, useState } from "react";
+import device from '/device.svg'
 import { url } from "../../utils/contants";
 function Page() {
   const [currentLoc, setCurrectLoc] = useState("");
@@ -169,10 +170,10 @@ function Page() {
               <h1 className="font-semibold w-fit px-5 py-2 bg-[#CBBF93]">
                 Device Picture
               </h1>
-              <figure className="w-full h-full">
+              <figure className="w-full h-full max-h-[300px] lg:max-h-[525px]">
                 <img
-                  className="w-full h-full border  object-contain"
-                  src={system?.find((item) => item.id === currentDevice)?.image}
+                  className="w-full h-full border object-contain"
+                  src={system && system?.find((item) => item.id === currentDevice)?.image || device}
                   alt=""
                 />
               </figure>

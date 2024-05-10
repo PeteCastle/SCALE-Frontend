@@ -6,7 +6,7 @@ import {
 } from "react-icons/io";
 import { url } from "../../utils/contants";
 import { GrSelect } from "react-icons/gr";
-
+import angle from '/arrow.svg'
 function Page() {
   const [defaultCarousel, setDefaultCarousel] = useState();
   const [defaultImg, setDefaultImg] = useState();
@@ -21,37 +21,41 @@ function Page() {
   const [selectedDeviceName, setSelectedDeviceName] = useState(null);
   const [showPlaceholder, setShowPlaceholder] = useState(false); // State to control placeholder visibility
 
-  useEffect(() => {
-    const fetchOne = async () => {
-      try {
-        const response = await fetch(
-          `${url}/v1/system/1/captures/history?page_size=2&page=2`
-        );
+  // useEffect(() => {
+  //   const fetchOne = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${url}/v1/system/1/captures/history?page_size=2&page=2`
+  //       );
 
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error);
-        }
+  //       if (!response.ok) {
+  //         const error = await response.json();
+  //         throw new Error(error);
+  //       }
 
-        const json = await response.json();
+  //       const json = await response.json();
 
-        const value = json.results?.reduce(
-          (prev, current) => {
-            const prevTime = new Date(prev.time);
-            const currentTime = new Date(current.time);
-            return prevTime > currentTime ? prev : current;
-          },
-          [0]
-        );
-        setDefaultImg(value.image);
-        setDefaultCarousel(json.results);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
+  //       const value = json.results?.reduce(
+  //         (prev, current) => {
+  //           const prevTime = new Date(prev.time);
+  //           const currentTime = new Date(current.time);
+  //           return prevTime > currentTime ? prev : current;
+  //         },
+  //         [0]
+  //       );
+  //       setDefaultImg(value.image);
+  //       setDefaultCarousel(json.results);
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //   };
 
-    fetchOne();
-  }, []);
+  //   fetchOne();
+  //   const intervalId = setInterval(fetchOne, 10000);
+
+  //   // Clear interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   useEffect(() => {
     const fetchRecent = async () => {
@@ -95,6 +99,7 @@ function Page() {
 
   const fetchOne = async (id, name) => {
     try {
+      console.log(id)
       setSelectedDeviceId(id);
       setSelectedDeviceName(name); // Set the selected device name
       setShowPlaceholder(true); // Display placeholder text when a device is selected
@@ -140,14 +145,14 @@ function Page() {
 
   const scrollByAmount = 200; // Adjust scroll amount as needed
 
-  const mostRecent = capture?.reduce(
-    (prev, current) => {
-      const prevTime = new Date(prev.time);
-      const currentTime = new Date(current.time);
-      return prevTime > currentTime ? prev : current;
-    },
-    [0]
-  );
+  // const mostRecent = capture?.reduce(
+  //   (prev, current) => {
+  //     const prevTime = new Date(prev.time);
+  //     const currentTime = new Date(current.time);
+  //     return prevTime > currentTime ? prev : current;
+  //   },
+  //   [0]
+  // );
 
   const scrollPrevHandler = () => {
     const scrollContent = document.querySelector(".scroll-content");
@@ -164,11 +169,26 @@ function Page() {
       behavior: "smooth",
     });
   };
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // const selectImageFromCarousel = (imageUrl) => {
+  //   setSelectedImageUrl(imageUrl);
+  // };
   const selectImageFromCarousel = (imageUrl) => {
+    const newIndex = capture.findIndex((val) => val.image === imageUrl);
+    setCurrentIndex(newIndex);
     setSelectedImageUrl(imageUrl);
   };
+  const moveToNextImage = () => {
+    const nextIndex = (currentIndex + 1) % capture.length;
+    setCurrentIndex(nextIndex);
+    setSelectedImageUrl(capture[nextIndex].image);
+  };
 
+  const moveToPreviousImage = () => {
+    const previousIndex = (currentIndex - 1 + capture.length) % capture.length;
+    setCurrentIndex(previousIndex);
+    setSelectedImageUrl(capture[previousIndex].image);
+  };
   const dateToPrint = selectedCapture
     ? new Date(selectedCapture.time).toDateString()
     : new Date(recent?.time).toDateString();
@@ -192,7 +212,7 @@ function Page() {
                 </div>
               </div>
               <div className="w-full h-full bg-[#F8F1D5] rounded ">
-                <ul className="w-11/12 h-full max-h-[425px] overflow-auto m-auto">
+                <ul className="w-11/12 h-full max-h-[200px] lg:max-h-[425px] overflow-auto m-auto">
                   {devices?.map((val, key) => (
                     <li
                       key={key}
@@ -200,11 +220,10 @@ function Page() {
                     >
                       <button
                         onClick={() => fetchOne(val.id, val.name)} // Pass device name to fetchOne function
-                        className={`w-full h-full font-semibold text-center ${
-                          selectedDeviceId === val.id
-                            ? "border-2 border-blue-500 rounded-full"
-                            : ""
-                        }`}
+                        className={`w-full h-full font-semibold text-center ${selectedDeviceId === val.id
+                          ? "border-2 border-blue-500 rounded-full"
+                          : ""
+                          }`}
                       >
                         {val.name}
                       </button>
@@ -214,7 +233,7 @@ function Page() {
               </div>
             </div>
 
-            <div className="row-span-2 overflow-hidden border shadow-md rounded-2xl p-4 bg-[#F8F1D5]">
+            <div className="row-span-2 overflow-hidden border shadow-md rounded-2xl p-4 lg:bg-[#F8F1D5]">
               <div className="w-full h-full flex items-center  justify-center">
                 <div className="flex justify-center text-center flex-col gap-2">
                   <span className="text-8xl font-bold">
@@ -229,22 +248,31 @@ function Page() {
           <div className="col-span-4 grid grid-cols-1 grid-rows-6 gap-5">
             <div className="row-span-6 col-span-1 flex flex-col ">
               <h1 className="font-semibold w-fit text-2xl px-5 py-2 bg-[#CBBF93] rounded-t">
-                Device Picture
+                Captured Photo
               </h1>
-              <div className="w-full h-[600px] mb-2 object-contain flex justify-center items-center">
-                <figure className="w-full h-full">
+              <div className="relative w-full h-full lg:h-[600px] mb-2 object-contain flex justify-center items-center">
+                <button className="absolute left-5  rotate-180" onClick={moveToPreviousImage}>
+                  <figure className="size-full max-w-10">
+                    <img className="size-full" src={angle} alt="" />
+                  </figure>
+                </button>
+                <button className="absolute right-5" onClick={moveToNextImage}><figure className="size-full max-w-10">
+                  <img className="size-full" src={angle} alt="" />
+                </figure></button>
+                <figure className="w-full h-full max-h-[200px] lg:max-h-max">
                   {selectedImageUrl ? (
                     <img
                       src={selectedImageUrl}
-                      className="w-full h-[600px] object-fit fade-in"
+                      className="w-full h-full object-fit fade-in"
                       alt={data?.name}
                     />
+
                   ) : (
-                    <div className="w-full h-[600px] bg-gray-200 flex justify-center content-center mx-auto items-center">
+                    <div className="w-full h-[200px] md:h-[400px] xl:h-full xl:max-h-max bg-gray-200 flex justify-center content-center mx-auto items-center">
                       <span className="text-gray-500">
                         <GrSelect />
                       </span>
-                      <span className="text-gray-500 text-lg font-semibold">
+                      <span className="text-gray-500 text-sm max-w-[250px] lg:max-w-max lg:text-lg font-semibold">
                         Please select a recent captured image for
                         <span className="text-gray-800 font-semibold">
                           {" "}
@@ -256,7 +284,7 @@ function Page() {
                 </figure>
               </div>
 
-              <div className="w-full h-[50px] flex justify-center items-center bg-[#CBBF93] rounded p-5">
+              <div className="w-full h-[50px] flex justify-center items-center text-sm lg:text-base bg-[#CBBF93] rounded p-5">
                 {selectedImageUrl && locationToPrint
                   ? `${dateToPrint} | ${timeToPrint} | ${locationToPrint}`
                   : "No Details found"}
@@ -270,31 +298,29 @@ function Page() {
                 {/* Your images here */}
                 {capture && capture.length > 0
                   ? capture?.map((val, key) => (
-                      <img
-                        key={key}
-                        src={val.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === val.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(val.image)}
-                      />
-                    ))
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))
                   : defaultCarousel?.map((val, key) => (
-                      <img
-                        key={key}
-                        src={val.image}
-                        className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${
-                          selectedImageUrl === val.image
-                            ? "border-2 border-blue-500"
-                            : ""
+                    <img
+                      key={key}
+                      src={val.image}
+                      className={`scroll-item w-[100px] h-[200px] object-cover cursor-pointer ${selectedImageUrl === val.image
+                        ? "border-2 border-blue-500"
+                        : ""
                         }`}
-                        alt=""
-                        onClick={() => selectImageFromCarousel(val.image)}
-                      />
-                    ))}
+                      alt=""
+                      onClick={() => selectImageFromCarousel(val.image)}
+                    />
+                  ))}
               </div>
 
               <button

@@ -4,15 +4,14 @@ import dashboard from "/dashboard.svg";
 import target from "/target.svg";
 import location from "/location.svg";
 import map from "/map.svg";
-import arrow from '/arrow.svg'
-import YoutubeEmbed from "./YoutubeEmbed";
+
 const TitleSection = () => {
   return (
     <>
-      <section className="py-10 xl:py-0 w-full h-100 md:h-auto xl:h-screen lg:h-auto flex flex-col md:grid grid-rows-2 gap-5">
-        <div className="row-span-1">
+      <section className="py-10 xl:py-0 w-full h-100 md:h-auto xl:h-screen lg:h-auto flex flex-col items-center justify-center  gap-5">
+        <div className="">
           <div className="text-center px-4 lg:px-12">
-            <h1 className="mt-10 text-2xl lg:text-3xl max-w-screen-xl m-auto font-bold text-gray-800 mb-4 text-wrap">
+            <h1 className="mt-10 text-2xl lg:text-4xl max-w-screen-xl m-auto font-bold text-gray-800 mb-4 text-wrap">
               Integrated Mosquito Detection and Fumigation System Utilizing Faster
               Region-Based Convolutional Neural Networks
             </h1>
@@ -92,22 +91,7 @@ const TitleSection = () => {
             </a>
           </div>
         </div>
-        <div className="row-span-1 w-full md:w-4/5 m-auto h-fit md:h-full flex flex-col grid xl:grid-cols-2 gap-5">
-          <div className="col-span-1 flex items-center justify-center m-auto h-[250px] md:h-4/5 w-4/5">
-            <YoutubeEmbed />
-          </div>
-          <div className="col-span-1 flex items-center justify-center">
-            <div className="w-4/5 m-auto md:max-w-lg flex flex-col gap-5">
-              <h1 className="font-primary font-bold text-2xl text-center lg:text-start">See our System in Action!</h1>
-              <p className="font-primary text-center lg:text-start">Discover how SCALE transforms mosquito control with advanced detection, tracking, and elimination features. Explore our intuitive website application platform for monitoring, settings configuration, and insightful analytics. </p>
-              <button className="p-2 hover:bg-[#E0BD68]/50 ease-in-out duration-300 bg-[#E0BD68] w-fit px-10 rounded-full m-auto lg:m-0">
-                <figure className="size-full max-w-10">
-                  <img src={arrow} className="size-full" alt="" />
-                </figure>
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </section>
     </>
   );

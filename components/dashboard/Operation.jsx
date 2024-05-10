@@ -47,19 +47,22 @@ const Operation = () => {
   };
   return (
     <>
+      <div className="w-11/12 m-auto h-full max-h-20 flex">
+        <h1 className="font-bold text-2xl">Fumigations by Week</h1>
+      </div>
       <div className="w-11/12 m-auto flex flex-wrap justify-center items-center gap-2 xl:gap-5">
-        {data && data.length > 0 ? data.map((val,key) => (
+        {data && data.length > 0 ? data.map((val, key) => (
           <div className="flex gap-2 items-center">
-          <input
-            type="color"
-            value={val.color}
-            className="w-6 h-6 outline-none border-black"
-            disabled
-          />
-          <label htmlFor="" className="text-xs xl:text-base">
-            {val.week}
-          </label>
-        </div>
+            <input
+              type="color"
+              value={val.color}
+              className="w-6 h-6 outline-none border-black"
+              disabled
+            />
+            <label htmlFor="" className="text-xs xl:text-base">
+              {val.week}
+            </label>
+          </div>
         )) : ''}
       </div>
       <div className="w-full h-60 xl:h-full">

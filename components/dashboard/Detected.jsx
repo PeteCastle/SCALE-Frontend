@@ -39,7 +39,7 @@ const Detected = () => {
           date: date,
           value: value,
         }));
-
+        console.log(result)
         setData(result);
       } catch (err) {
         console.log(err.message);
@@ -48,7 +48,30 @@ const Detected = () => {
 
     fetchData();
   }, [selectedTimeOption, selectedSystemOptions]);
+  const CustomTooltip = ({ active, payload, label }) => {
+    const formattedTime = (label) => {
+      const timeParts = label.split(":");
+      const hours = parseInt(timeParts[0]);
+      const formattedHours = (hours % 12 === 0) ? 12 : hours % 12;
+      const amOrPm = hours >= 12 ? "PM" : "AM";
+      return `${formattedHours.toString().padStart(2, '0')}:00 ${amOrPm} `;
+    };
 
+    if (active && payload && payload.length) {
+      return (
+        <div className="w-20 h-16 bg-white shadow-md rounded-xl flex flex-col items-center justify-center">
+          <p className="font-primary">
+            {formattedTime(label)}
+          </p>
+          <p className="font-semibold font-primary">
+            {payload[0].value}%
+          </p>
+        </div>
+      );
+    }
+
+    return null;
+  };
   return (
     <div className="xl:col-span-3 border bg-[#ECF5BE] rounded-xl shadow-md p-5 flex flex-col gap-5">
       <div className="flex flex-col md:flex-row justify-between items-center">
@@ -80,9 +103,24 @@ const Detected = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" tick={{ fontSize: 10 }} interval={0} />
+            <XAxis
+              dataKey="date"
+              tick={{ fontSize: 10 }}
+              interval={0}
+              tickFormatter={(tick) => {
+                const timeParts = tick.split(":");
+                const hours = parseInt(timeParts[0]);
+                const formattedHours = (hours % 12 === 0) ? 12 : hours % 12;
+                const amOrPm = hours >= 12 ? "PM" : "AM";
+                const formattedTime = `${formattedHours.toString().padStart(2, '0')}:00 ${amOrPm} `;
+                return formattedTime;
+              }}
+            />
             <YAxis yAxisId="left" tick={{ fontSize: 10 }} interval={0} />
-            <Tooltip />
+            <Tooltip
+
+              content={CustomTooltip}
+            />
             <Line
               yAxisId="left"
               type="monotone"
