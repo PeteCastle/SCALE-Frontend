@@ -288,7 +288,7 @@ const SecondSection = () => {
 
                   <div className=" gap-2 space-y-2 space-x-1 ">
                     <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-[10px]  bg-gray-800 text-white  ">
-                      Accountant
+                      Hardware
                     </span>
                   </div>
                   <p className="mt-3 mb-4 text-xs font-primary text-gray-500 text-pretty dark:text-gray-400">
